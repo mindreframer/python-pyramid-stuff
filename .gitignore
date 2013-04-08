@@ -1,0 +1,9 @@
+_themes
+_build
+allnose.sh
+env*/
+*.egg-info*
+*__pycache__*
+*.pyc
+sqltutorial.sqlite
+tmp
