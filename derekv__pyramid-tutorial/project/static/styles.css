@@ -1,0 +1,63 @@
+
+* 
+{
+    font-family: "Envy Code R", "Droid Sans Mono", "Andale Mono", consolas, monospace;
+}
+
+body 
+{ 
+    background-color: #dad0da; 
+    color: #000000 
+    font-size: 100%
+}
+
+.homeaction
+{
+    margin: 10px;
+    margin-left: 15%;
+    padding: 5px;
+    width: 50%;
+    background-color: #c9c9c0;
+    color: #000000;
+    font-size: 120%
+}
+
+.homeaction a
+{
+    color: #031030
+}
+
+.bigbutton 
+{
+    height: 100px;
+    width: 233px;
+}
+
+.bigbutton input
+{
+    height: 100%;
+    width: 100%;
+    font-size: 66px;
+}
+
+.favorites_box 
+{
+    margin: 20px;
+    margin-left: 15%;
+    padding: 15px;
+    width: 50%;
+    background-color: #c9c9c0
+}
+
+.favorites_list > a
+{
+    color: #031030
+}
+
+.logout
+{
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    width: 50px;
+}
