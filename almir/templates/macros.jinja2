@@ -1,0 +1,133 @@
+{% macro link(options) -%}
+    {% if options.href %}
+        <a {% if options.data_numeric is defined %}data-numeric="{{ options.data_numeric }}" {% endif %}href="{{ options.href }}">{{ options.text }}</a>
+    {% elif options.text is defined %}
+        {% if options.data_numeric is defined %}
+            <span data-numeric="{{ options.data_numeric }}">{{ options.text }}</span>
+        {% else %}
+            {{ options.text }}
+        {% endif %}
+    {% else %}
+        /
+    {% endif %}
+{%- endmacro %}
+
+{% macro td_link(options) -%}
+    <td {% if options.cssclass is defined %}class="{{ options.cssclass }}"{% endif %}>{{ link(options) }}</td>
+{%- endmacro %}
+
+{% macro upcoming_jobs_table(request, jobs) -%}
+    <table class="table table-bordered datatables">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Level</th>
+                <th>Priority</th>
+                <th>Scheduled</th>
+                <th>Volume</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.type }}</td>
+                    <td>{{ job.level }}</td>
+                    <td>{{ job.priority }}</td>
+                    <td>{{ job.date }} {{ job.time }}</td>
+                    <td>{{ job.volume }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{%- endmacro %}
+
+{% macro jobs_table(request, jobs) -%}
+    <table class="table table-bordered datatables">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Type</th>
+                <th>Level</th>
+                <th>Files</th>
+                <th>Size</th>
+                <th>Client</th>
+                <th>Started</th>
+                <th>Duration</th>
+                <th>Errors</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+                <tr class="clickable-row {{ job.render_status_color(request) }}" data-link="{{ request.route_url('job_detail', id=job.jobid) }}">
+                    <td>{{ link(job.render_name(request)) }}</td>
+                    <td>{{ link(job.render_status(request)) }}</td>
+                    <td>{{ link(job.render_type(request)) }}</td>
+                    <td>{{ link(job.render_level(request)) }}</td>
+                    <td>{{ link(job.render_jobfiles(request)) }}</td>
+                    {{ td_link(job.render_jobbytes(request)) }}
+                    <td>{{ link(job.render_client_name(request)) }}</td>
+                    <td>{{ link(job.render_starttime(request)) }}</td>
+                    <td>{{ link(job.render_duration(request)) }}</td>
+                    {{ td_link(job.render_joberrors(request)) }}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{%- endmacro %}
+
+{% macro volumes_table(request, volumes) -%}
+    <table class="table table-striped table-bordered datatables">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Size</th>
+                <th>Last written</th>
+                <th>Expires</th>
+                <th>Storage</th>
+                <th>Pool</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for volume in volumes %}
+                <tr class="clickable-row" data-link="{{ request.route_url('volume_detail', id=volume.mediaid) }}">
+                    <td>{{ link(volume.render_volumename(request)) }}</td>
+                    {{ td_link(volume.render_volstatus(request)) }}
+                    {{ td_link(volume.render_volbytes(request)) }}
+                    <td>{{ volume.lastwritten }}</td>
+                    <td>{{ link(volume.render_expires(request)) }}</td>
+                    <td>{{ link(volume.render_storage_name(request)) }}</td>
+                    <td>{{ link(volume.render_pool_name(request)) }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{%- endmacro %}
+
+{% macro logs_table(request, logs, show_jobid=True) -%}
+    <table class="table table-striped table-bordered datatables">
+        <thead>
+            <tr>
+                {% if show_jobid %}
+                <th>Job</th>
+                {% endif %}
+                <th>Time</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+                <tr class="clickable-row" data-link="{{ request.route_url('job_detail', id=log.jobid) }}">
+                    {% if show_jobid %}
+                    <td>{{ log.jobid }}</td>
+                    {% endif %}
+                    <td>{{ log.time }}</td>
+                    {{ td_link(log.render_logtext(request)) }}
+                </tr>
+            {% endfor %}
+        </tbody>
+     </table>
+{%- endmacro %}

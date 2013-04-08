@@ -1,0 +1,11 @@
+{% extends "templates/base.jinja2" %}
+
+{% block content %}
+    <h1 class="view">Job <small>list</small></h1>
+    {% if appstruct.state == 'scheduled' %}
+        {{ macros.upcoming_jobs_table(request, objects) }}
+    {% else %}
+        <table id="list_jobs" class="table table-bordered datatables">
+        </table>
+    {% endif %}
+{% endblock %}

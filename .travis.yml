@@ -1,0 +1,32 @@
+language: python
+python:
+  - 2.6
+  - 2.7
+env:
+  - DATABASE="mysql"
+  - DATABASE="sqlite"
+  - DATABASE="postgresql"
+install:
+  - cp buildout.d/templates/buildout.cfg.in buildout.cfg
+#  - sed -i 's/bacula.db/almir/tests/fixtures/sqlite3.db/' buildout.cfg
+#  - director_password=$(sudo grep 'Password' /etc/bacula/bconsole.conf | sed 's/.*Password\s*=\s*"\(.\+\)"/\1/')
+#  - sed -i "s@director_password = @director_password = $director_password@" buildout.cfg
+  - python bootstrap.py
+  - bin/buildout
+
+before_script:
+  - "sh -e /etc/init.d/xvfb start"
+# setup mysql
+  - mysql -e 'create database bacula;'
+  - mysql bacula < almir/tests/fixtures/mysql.sql
+# setup postgres
+  - psql -U postgres -c 'create database bacula;'
+  - pg_restore -O -U postgres -d bacula almir/tests/fixtures/postgresql.sql
+
+script:
+  - bin/nosetests -v -s
+  - ./.travis_qunit_tests.sh
+
+notifications:
+  irc:
+    - "irc.freenode.org#almir"
