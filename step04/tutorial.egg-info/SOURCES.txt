@@ -1,0 +1,7 @@
+tutorial.egg-info/PKG-INFO
+tutorial.egg-info/SOURCES.txt
+tutorial.egg-info/dependency_links.txt
+tutorial.egg-info/entry_points.txt
+tutorial.egg-info/not-zip-safe
+tutorial.egg-info/requires.txt
+tutorial.egg-info/top_level.txt
