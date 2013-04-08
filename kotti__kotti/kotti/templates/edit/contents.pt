@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      i18n:domain="Kotti"
+      metal:use-macro="api.macro('kotti:templates/view/master.pt')">
+
+  <article metal:fill-slot="content" class="document-view content">
+    <h1>${context.title}</h1>
+    <p class="description">
+      ${context.description}
+    </p>
+
+    <div class="body">
+
+      <div id="contents-path"
+           tal:define="items python: reversed(api.lineage)">
+          <tal:repeat tal:repeat="item items">
+            <a tal:define="first repeat.item.start; last repeat.item.end;"
+               class="btn btn-small" name="${item.name}"
+               href="${request.resource_url(item, '@@contents')}">
+                <i tal:condition="first" class="icon-home"></i>
+                <i tal:condition="not: first or last" class="icon-folder-close"></i>
+                <i tal:condition="last and not first" class="icon-folder-open"></i>
+                ${item.title}
+            </a>
+          </tal:repeat>
+      </div>
+
+      <form action="${request.resource_url(context)}@@contents" method="post">
+        <tal:no-content tal:condition="not:children">
+          <span class="text-info" i18n:translate="">No content in document.</span>
+        </tal:no-content>
+
+        <table id="contents-table"
+          class="table table-condensed table-striped table-hover"
+          tal:condition="children">
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="toggle-all" /></th>
+              <th i18n:translate="">Title</th>
+              <th i18n:translate="">Type</th>
+              <th i18n:translate="">State</th>
+              <th i18n:translate="">Visibility</th>
+              <th i18n:translate="">Creation Date</th>
+              <th i18n:translate="">Modification Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr tal:repeat="child children" id="${child.position}">
+              <td>
+                  <input name="children" type="checkbox" value="${child.id}" />
+              </td>
+              <td>
+                  <a href="${request.resource_url(child, '@@contents')}">
+                      ${child.title}
+                  </a>
+                  <br tal:condition="child.type_info.name == 'Image'" />
+                  <img src="${request.resource_url(child, 'image/span1')}"
+                    class="thumb" title="${child.title}"
+                    data-content="<img src='${request.resource_url(child, 'image/span4')}' />"
+                    tal:condition="child.type_info.name == 'Image'" />
+              </td>
+              <td>
+                ${child.type_info.title}
+              </td>
+              <td>
+                <ul class="nav">
+                  <li tal:replace="api.render_view('workflow-dropdown', context=child)" />
+                </ul>
+              </td>
+              <td>
+                <tal:visibility tal:switch="child.in_navigation">
+                  <tal:visible tal:case="True">
+                    <i class="icon-eye-open"></i>
+                    <span i18n:translate="">Visible</span>
+                  </tal:visible>
+                  <tal:hidden tal:case="False">
+                    <i class="icon-eye-close"></i>
+                    <span i18n:translate="">Hidden</span>
+                  </tal:hidden>
+                </tal:visibility>
+              </td>
+              <td>
+                ${api.format_date(child.creation_date)}
+              </td>
+              <td>
+                ${api.format_date(child.modification_date)}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <tal:button tal:repeat="button buttons">
+          <button name="${button.path}" type="submit" class="${button.css_class}"
+                  tal:condition="children or button.no_children">
+            ${button.title}
+          </button>
+        </tal:button>
+
+      </form>
+    </div>
+  </article>
+
+</html>
