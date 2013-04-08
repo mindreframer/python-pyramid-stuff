@@ -1,0 +1,19 @@
+v0.0.1, 2013-03-24 -- Initial release.
+
+v0.1.0, 2013-04-05 -- Working release.
+- 'ViewCallable' classes: A collection of classes that can be used as Pyramid
+  view-callables.
+- 'BaseViewCallable': A non-working base for view-callables.
+- 'SimpleViewCallable': Passes the request directly to the wrapped callable.
+- 'FunctionViewCallable': Gets keyword arguments by parsing the request. Passes
+  those arguments to the wrapped callable, returns the result.
+- 'APIViewCallable': Uses 'iomanager' package to coerce/verify input/output.
+  View-callable parameters are specified using decorator keyword arguments.
+- 'scan_api_tree': A function that scans a dictionary of view-callables and
+  registers each of them with a Pyramid 'Configurator' instance. Endpoint paths
+  are constructed recursively.
+
+v0.1.0a, 2013-04-08 -- Beta: API documentation
+- Add 'api_documentation' module.
+- Add 'prepare_item' function to prepare 'iospec' values for rendering in HTML and
+  JSON.
