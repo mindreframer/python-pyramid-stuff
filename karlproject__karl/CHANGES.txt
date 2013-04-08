@@ -1,0 +1,2411 @@
+karl package Changelog
+======================
+
+Unreleased
+----------
+
+3.107 (2013-04-02)
+------------------
+
+- Allowed modifying available report columns for peopledirectory reports
+  via registering a utility for a new ``karl.views.interfaces.IReportColumns``
+  interface.
+
+- Added option for named portlets in intranet middle / right columns.
+  To use a named portlet, append '|' plus the adapter name to an item's path.
+  (LP #1150171)
+
+- Fixed 'kaltura' tinymce plugin: (LP #1105224).
+  
+- Fixed 'imagedrawer' tinymce plugin: "TypeError: this.bind is not a function"
+  happened and dialog did not open, in case there were no images previously
+  uploaded, and the dialog wanted to start with no image currently selected. 
+
+- 'came_from' handling is now dealt with exclusively using a user's session.
+  'came_from' no longer leaks to the browser in query strings or hidden form
+  fields. (LP #1135630)
+
+- Fixed deletion of multiple items within peopledirectory admin views
+  (LP #1144910).
+
+- Fixed ordering of items within peopledirectory admin views (LP #1144889).
+
+- Added a view to dump the event feed as CSV. (LP #1100421).
+
+- Bump contentfeeds buffer from 1000 to 5000 items. (LP #1100421).
+
+3.106 (2013-02-13)
+------------------
+
+- Fixed bug where images uploaded to new news items weren't moved from their
+  temporary location once the news item was saved.
+
+- Remove old tinymce version 3.3.9.2 from the codebase.
+
+- Remove experimental desktop file synchronization feature.
+
+- Convert GSSErrors due to invalid tickets (some Oxfam browsers send NTLM
+  tickets) from errors to warnings in the log to prevent firing off spurious
+  alarms.
+
+3.105 (2012-12-07)
+------------------
+
+- Fix wrapping problem with my profile pushdown. (LP #1058054)
+
+- Fix layout on intranet home page to use three columns. (LP #1068157)
+
+- Fix problem with global navigation not assigning selected status to
+  some tabs. (LP #1068183)
+
+- Prevent rtf converter from raising exception for parse errors when
+  indexing file contents. (LP #1080642)
+
+- Temporarily unwire chatter from UX2 UI. (LP #1086107)
+
+3.104 (2012-12-03)
+------------------
+
+- Fixed 'came_from' redirect when using Kerberos login.
+
+- Fix recent activity table layout in my profile pushdown. (LP #1068169)
+
+- Make grid and search options font larger. (LP #1068147)
+
+- Make sure that open blob files passed into repozitory get closed. (LP
+  #1081282)
+
+3.103 (2012-11-29)
+------------------
+
+- Fix permission of the ajaxian Delete, MoveTo button actions in the Files grid.
+  Affects both ux1 and ux2. (LP #1084066)
+
+- Fix permission of the ajaxian file upload.
+  Affects both ux1 and ux2. (LP #1084066)
+
+3.102 (2012-11-21)
+------------------
+
+- Make sure generate_stats script calls set_current_instance. (LP #1067453)
+
+- Make center section on intranets narrower to avoid breaking the layout.
+  (LP #1068190).
+
+- Fix css conflict that caused reference manual add buttons to disappear.
+  (LP #1068200)
+
+3.101 (2012-11-20)
+------------------
+
+- Fixed link to login form in the password reset completed page.
+  (LP #1080834).
+
+- Fixed bug in profile display introduced by new Chrome version.
+  (LP #1078319)
+
+- Don't break in impersonate login plugin if the value to the left of the colon
+  ':' character in the password field is not an actual user.  It is possible
+  that some users might actually have passwords which contain colons. (LP
+  #1080760)
+
+- Migrate admin section to ux2 (LP #1043537).
+
+- Avoid error when reference manual marker is removed from a folder and an
+  intranet layout is used. (LP #1059559)
+
+- Fixed word wrap problem in recent activity portlet. (LP #1057065)
+
+- Removed intranets link from global nav and made logo link to that when
+  inside an intranet. (LP #1053624).
+
+3.100 (2012-11-15)
+------------------
+
+- Fix the Add / Edit Event forms, to show the All Day checkbox in ux2. (LP #1060342)
+
+- Fix the position of the option panel in the UX2 wiki index (LP #1057067)
+
+- Implement left-right chevrons in the option panel toggle button
+  in the UX2 wiki index (LP #1057067)
+
+- karl.wikitoc.js is now forked to two separate copies for ux1 and ux2
+  (just like all other js, in accordance with our best practice)
+
+3.99 (2012-11-08)
+-----------------
+
+- Add optional integration with Velruse for single sign on.
+
+- Implement localized dates for ux2. (LP #1051005)
+
+- Cleaned up the LESS files and changed the width to 950-or-so pixels.
+  (LP #1044077)
+
+- Changed text conversion error into warning to avoid triggering monitor.
+  (LP #1035308)
+
+- Fixed date formats (EU / US) in the profile page, in the Created
+  column of the Content Added Recently grid. (LP #1057068)
+
+- Fixed event portlet styles on intranets.
+
+- Removed responsive design
+
+- in the ux2 content feeds filter box, make the green button work correctly on IE8.
+  Also, adjust the green button's position and height to look nice
+  on all browsers. (LP #1050493)
+
+- Fix livesearch results formatting in ux2, which became messed up
+  because the css loading sequence has changed. (LP #1067878)
+
+3.98 (2012-09-26)
+-----------------
+
+- Fixed link to edit profiles in admin profile view (LP #1042318).
+
+- Switched global notification background and text color (LP #1050965)
+
+- Indented profile info on ux2 (LP #1050067)
+
+- improve chatter messages view and fix messages pulldown view link.
+
+- Implement a slickgrid based solution for the Tabular view of the ux2 People
+  grid.  This eliminates pagination on People Tabular reports. (LP #1046463)
+
+- In the Files (slick) grid, in ux2 only, decrease the width of the Type
+  (mimetype) field to smaller, just enough to accomodate the Type label in the
+  column header.
+
+- Fix alternating rows to match the rest of the site,
+  in the Files and People grids (slickgrids) in ux2.
+
+- Fix date format problems where on various locations, the US date format
+  was incorrectly displayed even if the user had selected an EU date format.
+  (LP #938063)
+
+  *  start and end dates at show calendar event (ux1 + ux2) display only
+
+  *  blog comments (ux1 + ux2) display only
+
+  *  start_date, end_date fields of add/edit calendar events. This
+     covers the support through both the form widget and the javascript
+     (including the jquery-ui datepicker) stack
+
+  *  Publication Date field of the Add News Item (ux1 + ux2)
+
+- Fix date format (US / EU) in the date column of the wiki index. Both ux1
+  and ux2. (LP #1051243)
+
+3.97 (2012-09-14)
+-----------------
+
+- Integrate with the perfmetrics package to start sending performance metrics
+  to statsd/graphite.
+
+- Fixed problem where a link inside a button on feeds would not work on some
+  browsers.
+
+- Added a layout for intranets with left navigation.
+
+- Add globalization for dates in calendar portlets.
+
+- Add correct Office 2010 format mime types to multiupload.
+
+- Corrected typo that prevent email icon from showing up in people directory.
+
+- Fixed problem where javascript actions would not work in people directory.
+
+- Add rss and email icoins to blog view.
+
+- make tag portlet label use the correct name or my tags, depending on
+  viewed profile.
+
+- Added labels with filter type to edit filter forms in people directory.
+
+- Added padding to .contentWrapper when .noSectionMenu
+
+- Fix imagedrawer to work on IE. The file upload was hanging with spinner
+  stuck forever. I applied a 'trivial' fix in ajaxfileupload.js.
+  In fact I wonder why the previous code used to work on IE at all...
+  In any case, the iframe creation code is now cleaned. (LP #1046900)
+
+- Fixed calendar toolbar buttons wrapping under ie8
+
+- Fixed calendar setup option alignment
+
+- Applied new skin to  not found view
+
+- Fixed offices footer wrapping bug under ie9
+
+- Removed ux2 site annoucement animation
+
+- Make sure affiliates can see All/Active communities widget. (LP #1037761)
+
+- Added new pushdown feature for profile details and quick links.
+
+3.96 (2012-09-06)
+-----------------
+
+- Return a 405 Method Not Allowed response to all OPTIONS and PROPFIND requests.
+  (LP #1046967)
+
+- Make sure all filters are reset on advanced search form when performing
+  a new query from the main text box on the page.
+
+- Fixed proportions on the "Very Wide Desktop" UX2 layout (LP #1042328)
+
+- Add multiple file download feature, allowing users to select one or
+  more files from the show folder view and get a zip file with them.
+
+- Fix problem with making thumbnails from TIFF images. (LP #1028521)
+
+3.95 (2012-09-05)
+-----------------
+
+- Only users with admin privileges on a reference manual can move sections
+  up and down.
+
+- Fix calendar border formatting issues on UX2 and IE8, IE9 (LP #1037226)
+
+3.94 (2012-09-04)
+-----------------
+
+- Fixed bug where deletion of things like files and folders was broken due to
+  Repozitory not being able to access user's identity after context was removed
+  from tree.  (LP #1045483)
+
+3.93 (2012-09-03)
+-----------------
+
+- Fixed bug where accept invitation form was trying to use a deprecated method
+  of remembering a user login.
+
+3.92 (2012-09-03)
+-----------------
+
+- Fixed bug in mailin, preventing it from being able to determine permissions of
+  mailin users.  (LP #1044076)
+
+3.91 (2012-08-30)
+-----------------
+
+- Return a 404 instead of General Error when someone visits /static/. (LP
+  #1038990)
+
+- Fix up content feeds when users are renamed or merged.
+
+- Use doctotext to index Office files to allow indexing of Office 2010
+  formats (docx, xlsx, pptx).
+
+- Profile owners can now deactivate their own profiles.
+
+- Ux2 template for deactivation.
+
+- Make sure biography field is passed into created profile on invitations.
+
+- Add globalize date formatting to all pages that still don't have it.
+
+- Make tags and creator filters not sticky when starting new search.
+
+- When mailin receives a reply for content that doesn't exist anymore,
+  bounce message instead of sending to quarantine.
+
+- Removed hardwired instance name from tagbox js which caused bad urls.
+
+- Fix CSV user uploads when a user has already been invited to Karl.
+  (LP #1025922)
+
+- always use short description in content feeds to avoid formatting issues with
+  special content.
+
+- remove duplicate alpha added subscriber which caused community letter nav to
+  show invalid letters.
+
+- Fixed calendar printing on ux2 (LP #904822)
+
+- Fixed the calendar popover to be clickable on ux2 (LP #1024000)
+
+- Disuse repoze.who in favor of more standard Pyramid-style authentication.
+
+3.90 (2012-07-12)
+-----------------
+
+- Fixed bug in Chatter that caused Not Found errors to get turned into
+  General Errors that tripped the error monitor's alarm.  (LP #1018909)
+
+- Added support for logging Not Found errors under their own category in the
+  Redis log, so they can be monitored without tripping any alarms.
+  (LP #1018909)
+
+- Guard office links in footer with permission.  (LP #1018478)
+
+- Continuing work on UX2.
+
+3.89 (2012-06-26)
+-----------------
+
+- Continuing work on UX2.
+
+- Fixed the 'Add Column' link in peopledir. (LP #931878)
+
+3.88 (2012-06-06)
+-----------------
+
+- Fixed bug in digest. (LP #932865)
+
+- Continuing work on UX2.
+
+3.87 (2012-05-30)
+-----------------
+
+- Replaced the old filesystem based error monitor with the redislog.
+  (LP #960107)
+
+3.86 (2012-05-10)
+-----------------
+
+- The envelope from for bounced email messages is now set to the value of the
+  'postoffice.bounce_from_email' setting.  (LP #996027)
+
+- The admin views which access the postoffice quarantine now connect to the
+  postoffice db using repoze.zodbconn's built in support for multiple databases.
+  (LP #985546)
+
+- Continuing work on UX2.
+
+- Move the styled error pages from middleware into Pyramid exception views.
+  (LP 955307)
+
+3.85 (2012-04-23)
+-----------------
+
+- Fix more bugs caused by UX1 wanting to use the name 'layout' in templates.
+
+3.84 (2012-04-23)
+-----------------
+
+- Fix bug where rendering a template from a console script would raise an
+  exception.
+
+- Fix error when rendering Edit Reference Manual Page view in UX1. (LP #987257)
+
+3.83 (2012-04-19)
+-----------------
+
+- Major work on new user interface.  Work in progress now available for use by
+  KarlAdmin and other invited users.
+
+3.82 (2012-02-28)
+-----------------
+
+- When sorting folder listings by modified date, use fine-grained sorting.
+  (lp:907527)
+
+3.81 (2012-02-03)
+-----------------
+
+- Fixed lp:920668: more efficient trash UI for deep file hierarchies.
+
+- Implemented lp:897428: allow community moderators to delete files
+  and wiki pages permanently.
+
+3.80 (2012-01-04)
+-----------------
+
+- removed extra tal:attributes from template that caused wrong
+  selected values to display
+
+3.79 (2011-12-30)
+-----------------
+
+- Fix Chameleon 2 incompatility bugs in email_blog_entry.pt.
+
+- Fix problem with non-ascii characters in exception error messages in both
+  the error page view and the postoffice quarantine view.
+
+3.78 (2011-12-29)
+-----------------
+
+- Switch to Chameleon 2.
+
+3.77 (2011-12-16)
+-----------------
+
+- Fixed tag error on manage communities page.
+
+- Fixed bug in show file view where unicode filenames could cause an
+  error.
+
+3.76 (2011-12-15)
+-----------------
+
+- Fixed LP #891278: Some links to the wiki trash were incorrect.
+
+- Fixed LP #897435: File content needed to be reindexed on revert.
+
+- LP #824640: Add sorting facets to advanced search view.
+
+- LP #893767: Move 'Multi Upload' out of folder addables.
+
+3.75 (2011-12-07)
+-----------------
+
+- Fixed LP #883250: display proper page titles on member management
+  pages.
+
+- resolve distorted pictures on people page #892357
+
+3.74 (2011-11-17)
+-----------------
+
+- Fixed LP #877364:  tolerate 'macintosh' encoding (ancient OS9-ism) when
+  converting HTML to text.
+
+- Fixed LP #824631: Sped up search results involving a large time span
+  (such as "past year") using a new kind of index with multiple levels
+  of granularity. Also added an evolve script to perform the conversion.
+
+- Show staff calendar tab.
+
+- Fixed LP #890419: show last modified not creator on search results.
+
+- Change default calendar view from day -> month.
+
+3.73 (2011-10-27)
+-----------------
+
+- Fixed LP #874519: Clicking 'More Events' Resets Layer Selection
+
+- Fixed a series of IE bugs by restoring the doctype declaration
+  at the top of every page.
+
+3.72 (2011-09-29)
+-----------------
+
+- When doing the text indexing on files, text data is now re-extracted from
+  files if the cached text is an empty string.  This allows for files
+  previously indexed when an external converter was unavailable to be properly
+  reindexed after the external converter is added to the system.
+
+- When restoring an object from the trash, if a conflicting name is
+  in the container, append a suffix to the name.  (LP #821206)
+
+- Fixed a DST issue in the versions.format_local_date() function which
+  formats a date for display in versioning UIs.
+
+- Fixed the interpretation of message timestamps so that objects created
+  through email will have the correct time.  Also, prefer to use the
+  delivery timestamp provided by repoze.postoffice 0.17+. (LP #837699)
+
+- Use modern SI prefixes for file size display.  (1 KB = 1000 bytes)
+
+- Fix error in HTML text extractor causing it to fail if no character encoding
+  was supplied via a <meta> content type tag. (LP #848194)
+
+- Added versioning for the Files tool.
+
+- Made the Trash folder aware of documents that may have been marked deleted in
+  a folder because they were moved to another folder. Documents that are still
+  accessible in some way are not displayed in the Trash view.  This is a
+  workaround for LP #851118.
+
+3.71 (2011-09-01)
+-----------------
+
+- Made mail-in processing with aliased distribution lists respect the
+  'system_list_subdomain' setting, if configured.  (LP #824014)
+
+3.70 (2011-08-25)
+-----------------
+
+- The statistics option is now hidden in the admin UI if no statistics have
+  been generated yet.  (LP #821204)
+
+- Fixed bug in Wiki Page version preview where the title was always from the
+  current version rather than the version being previewed.  (LP #823552)
+
+- Updated the calendar to use cookies instead of a persistent session.
+
+- Added special handling in error page for read only errors.
+
+- 'last_login_time' is now only saved for a user if Karl is not in read only
+  mode, in order to allow users to log in when in read only mode without an
+  error.
+
+- Add locking to Wiki pages. Users are notified via a status-like message when
+  viewing a page that is currently being edited.
+
+3.69 (2011-08-04)
+-----------------
+
+- Add in tagusers.html view for profiles
+
+- HTML is now stripped from wiki links for the purposes of generating a title.
+  (LP #811107)
+
+- Hook up the `generate_stats` script for use with karlserve. (LP #812444)
+
+- Added onChange handlers for the author and tags fields on the search results
+  page to automatically submit their respective forms.  (LP #784257)
+
+- Added versioning and trash folder for Wiki Pages using Shane's 'repozitory'.
+  Merged from 'branches/rossi_repozitory'.
+
+- Fixed UnicodeDecodeError encountered while reindexing text data on staging.
+  Made improvements to the text from html extracter.
+
+- Default to active view for /communities
+
+- Modify advanced button text on blog page to read "Advanced" instead of
+  "Administer". (LP #820547)
+
+- Fix layout issue on community search results page (LP #820523)
+
+- Update jquery.timeago to 0.9.3 to resolve NaN date issues (LP #821014)
+
+3.68 (2011-07-14)
+-----------------
+
+- Made agility use simplejson instead of the stdlib json module for
+  compatibility with Python 2.5.  simplejson is already in use elsewhere in
+  the application.
+
+- Fixed bug where replacing a file via the Edit File form would fail to check
+  if a file changed from an image file to a non-image file or vice versa.
+  (LP #807478)
+
+- Mailed in content now gets a created timestamp set from the Date header of
+  the incoming email instead of the current time. (LP #806066)
+
+- Scrubbed the double parentheses from wiki links in search results for wiki
+  pages.  (LP #809969)
+
+- Fixed ie7 issue where adding in (un)ordered lists in tinymce was broken.
+
+- Display custom search results based on content type (LP #792333)
+
+3.67 (2011-06-30)
+-----------------
+
+- On file view, show last modified user and time also.
+
+- Make sure inactive users aren't emailed by the email blast tool.
+  (LP #771888)
+
+- Wikis will now grow a new front_page if the existing front_page is removed.
+  (LP #773480)
+
+- Handle case of user uploading two images with identical names via
+  imagedrawer. (LP #779870)
+
+- Unified the search types seen on the search results page with the search
+  categories used in live search.  Added a 'Reference Manuals' search.  Merged
+  from branches/rossi_search_unification.
+  (LP # 784222)
+
+- Changed the workflow for intranet content so that content is owned by the
+  organization rather than by individual authors.  (LP #798850)
+
+- Created a new 'email' permission and new group, 'group.KarlCommunications' in
+  order to allow select non-administrators to send bulk email from Karl.
+  (LP #798415)
+
+- Text index was not being updated when profiles changed from activate to
+  inactive state or vice versa.  (LP #803143)
+
+- Fixed bug where the form in the show tag view was generating a bad URL.
+  (LP #790169)
+
+- Made the single file upload behave like the multi file upload with respect
+  to files with duplicate names.  Duplicate files are now simply renamed
+  rather than giving the user a form validation error.  (LP #790920)
+
+3.66.1 (2011-06-24)
+-------------------
+
+- Fixed mailin bug where bounced and quarantined messages generated an
+  exception trying to email the authors.  (LP #801539)
+
+3.66 (2011-06-23)
+-----------------
+
+- Fixed error in displaying forum topics with comments. (LP #798125)
+
+- Improved text from html extraction used for extracting descriptions from
+  document text.  Weird Microsoft html is now removed.  (LP #794103)
+
+- Fixed error in search results page when search term is blank.  (LP #798727)
+
+- Made the html to text converter more tolerant of malformed html.
+
+- Refactored outgoing email to use Karl configuration for the envelope from
+  address. (LP #785267)
+
+- The custom weights (1, 1/32, 1/32**2, and 1/32**3) were not being applied
+  to text queries. Fixed.
+
+- Added the 'Precedence: bulk' header to content alert emails. (LP #785272)
+
+- Added 'clear log' link to error monitor view. (LP #795669)
+
+3.65 (2011-06-15)
+-----------------
+
+- Improved ranking of search results.  Merged from branches/rossi_docrank.
+
+- Pulled 'custom.css' out of the resources that are juiced. It is included
+  in each page separately so that customization packages can override.
+
+3.64 (2011-06-09)
+-----------------
+
+- The edit blog entry form is now only associated with the IBlogEntry content
+  type. (LP #715897)
+
+- Removed nonsensical 'Edit' button from the root people directory admin view.
+  (LP #715897)
+
+- In the advanced and live searches, set the unicode_errors policy to 'ignore'
+  in order to work around broken web browsers that send request strings in
+  character encodings other than UTF-8. (LP #788234)
+
+- Fixed spellcheck for Karl instances not rooted at '/'.
+
+- Added error logging for OSErrors encountered when trying to run spellcheck.
+  (LP #794279)
+
+- Improved thread safety of LRU cache implementation. Had not previously taken
+  into account havoc a clear() could play on reads.  (LP #791177)
+
+- Workaround for slow script execution on ie in files tool
+  (LP #792544)
+
+3.63 (2011-06-03)
+-----------------
+
+- Fix for grid error when viewing it not within a files section. This fixes an
+  error on the top level reference manuals page.
+
+3.62 (2011-06-02)
+-----------------
+
+- Multiple upload and file management (move/delete)
+
+- Fixed merge bug that made repoze.pgtextindex mandatory for building Karl.
+  repoze.pgtextindex (and psycopg2) are now optional again.
+
+3.61 (2011-05-26)
+-----------------
+
+- Livesearch result text overflow fix (LP #785450)
+
+- Trigger search on paste - rejuice from latest bottlecap (LP #785789)
+
+3.60 (2011-05-20)
+-----------------
+
+- Fixed error in displaying forum topics with comments. (LP #798125)
+
+- Improved text from html extraction used for extracting descriptions from
+  document text.  Weird Microsoft html is now removed.  (LP #794103)
+
+- Fixed error in search results page when search term is blank.  (LP #798727)
+
+- Made the html to text converter more tolerant of malformed html.
+
+- Refactored outgoing email to use Karl configuration for the envelope from
+  address. (LP #785267)
+
+- The custom weights (1, 1/32, 1/32**2, and 1/32**3) were not being applied
+  to text queries. Fixed.
+
+- Added the 'Precedence: bulk' header to content alert emails. (LP #785272)
+
+3.65 (2011-06-15)
+-----------------
+
+- Improved ranking of search results.  Merged from branches/rossi_docrank.
+
+- Pulled 'custom.css' out of the resources that are juiced. It is included
+  in each page separately so that customization packages can override.
+
+3.64 (2011-06-09)
+-----------------
+
+- The edit blog entry form is now only associated with the IBlogEntry content
+  type. (LP #715897)
+
+- Removed nonsensical 'Edit' button from the root people directory admin view.
+  (LP #715897)
+
+- In the advanced and live searches, set the unicode_errors policy to 'ignore'
+  in order to work around broken web browsers that send request strings in
+  character encodings other than UTF-8. (LP #788234)
+
+- Fixed spellcheck for Karl instances not rooted at '/'.
+
+- Added error logging for OSErrors encountered when trying to run spellcheck.
+  (LP #794279)
+
+- Improved thread safety of LRU cache implementation. Had not previously taken
+  into account havoc a clear() could play on reads.  (LP #791177)
+
+- Workaround for slow script execution on ie in files tool
+  (LP #792544)
+
+3.63 (2011-06-03)
+-----------------
+
+- Fix for grid error when viewing it not within a files section. This fixes an
+  error on the top level reference manuals page.
+
+3.62 (2011-06-02)
+-----------------
+
+- Multiple upload and file management (move/delete)
+
+- Fixed merge bug that made repoze.pgtextindex mandatory for building Karl.
+  repoze.pgtextindex (and psycopg2) are now optional again.
+
+3.61 (2011-05-26)
+-----------------
+
+- Livesearch result text overflow fix (LP #785450)
+
+- Trigger search on paste - rejuice from latest bottlecap (LP #785789)
+
+3.60 (2011-05-20)
+-----------------
+
+- Pagination is now reset when clicking on a facet in the search results page.
+  (LP #785360)
+
+- When waiting for livesearch results and a user hits enter, don't display an
+  error message.
+
+3.59 (2011-05-19)
+-----------------
+
+- Implemented better live search and search results pages.  (Merged from
+  ree-livesearch-resources branch.)
+
+3.58 (2011-05-17)
+-----------------
+
+- Added support for contextual summaries in search when using
+  repoze.pgtextindex. Had to refactor how text representations are generated
+  for both pgtextindex and Zope text index in the process. Merged from branch,
+  'rossi-contextual-summaries'. (LP #707671)
+
+- Fixed bug in distribution lists where the mail recipients were not being
+  passed as a list.  (LP #780000)
+
+- Added a mailin trace tool.  It looks like a regular blog tool but instead of
+  saving a blog entry that is added to it, it updates the timestamp on a file
+  in the filesystem. By sending a special tracer email to this tool at regular
+  intervals, the health of the mailin system can be monitored by monitoring the
+  timestamp on this external file.  (LP #770428)
+
+- Thumbnail view now raises NotFound if it can't extract a thumbnail size from
+  the subpath.  (LP #777365)
+
+- Updated the 'Add Page' view to properly relocate temporary images uploaded
+  via ImageDrawer.  (LP #782388)
+
+3.57 (2011-05-05)
+-----------------
+
+- In mailin, multiple recipients are now allowed for single messages.
+  (LP #773426)
+
+- Error monitor now shows referer for Karl exceptions. (LP #777365)
+
+- Stats view now raises NotFound if var/stats/stats.csv is not found.
+  (LP #777363)
+
+- Fixed error in reset password form.  (LP #774110)
+
+3.56 (2011-04-28)
+-----------------
+
+- Changed text scrubber to only use In-Reply-To header when deciding whether or
+  not to scrub text following the Outlook Express message separator as
+  opposed to any separator that it knows about.  (LP #757689)
+
+- The `error_monitor_status.txt` view can now accept a request parameter,
+  subsystem, which limits the status report to only the subsystem(s) specified.
+  The parameter may be included more than once:
+  `https://url.of/karl/error_monitor_status.txt?subsystem=mailin&subsystem=mailout`.
+
+3.55 (2011-04-04)
+-----------------
+
+- Added 'karl.scripting.only_once' API, to permit cron-driven scripts to
+  avoid running again if an earlier instance is still running.
+  The lockfile is named '<username>-<progname>', where '<username> is the
+  current user's login name, and '<progname>' is a string passed to
+  'only_once'.  By default, the lockfile is created in '/var/run/karl/';
+  this path can be overridden by setting 'lockdir' in the 'DEFAULT' section
+  of the configuration file.
+
+- Ensure that aliases for mailinglist objects are registered / deregistered
+  when the mailinglist is added / removed.  (LP #706018).
+
+- Get rid of some deprecation warnings under Python 2.6.
+
+- Change default "People" tab link to '/people' since all instances now get a
+  People Directory by default.
+
+- Fix offices link in Admin UI to work when site is not rooted at '/'.  Also
+  only show link when there are offices.
+
+- Fixed invalid Unicode returned by 'pdftotext' which was breaking pgtextindex.
+
+- Fixed the static view of the maintenance app to work when not rooted at '/'.
+
+- Added support for 'read only' mode.
+
+- Refactored logout view to not rely on repoze.who redirecting form plugin, in
+  order to be able to generate the url to redirect to at runtime.  (LP #745215)
+
+- Added default InvitationBoilerplate to allow Terms and Conditions and
+  Privacy Policy to be set up without using a customization policy.
+
+- Make sure templates always use ${api.app_url} in specifying hrefs.  Allows
+  Karl to be mountable at places other than '/' at a particular domain.
+
+3.54 (2011-01-19)
+-----------------
+
+- Fix people report picture views, broken by addition of report-based
+  e-mail distribution lists. (LP #705171)
+
+- Made report-based distribution lists addressable using "pretty" aliases.
+
+- Implemented " Distribution lists on organizational reports" blueprint;  see:
+  https://blueprints.launchpad.net/karl3/+spec/distribution-list-organizational
+
+- Added fault tolerance in mailin for messages in unknown character encodings.
+  (LP #698153)
+
+- Quote name parts of addresses in From, To and Reply-To headers in alerts.
+  (LP #702080)
+
+- The default layout provider now detects when context is not contained by a
+  community or intranet and returns the generic layout.  (LP #698879)
+
+
+3.53 (2010-12-20)
+-----------------
+
+- Fixed bug when uploading images to new content via image drawer where the
+  image would wind up stranded in a temp folder and would not show up in
+  'My Recent' or 'Community' in the image drawer. (LP #691141)
+
+3.52 (2010-12-06)
+-----------------
+
+- Remove 40-character limit for names of items inside the people directory.
+
+- On the community members table: moved hidden inputs into a table cell,
+  so IE doesn't add extra random space (LP #684209).
+
+- Add missing formish resources to a page that manually constructs its form
+  (LP #683651).
+
+
+3.51 (2010-11-30)
+-----------------
+
+- Enabled adding redirector objects to peopledir sections, in order to
+  provide backward compatibility for old URLs.
+
+- Fix mailin for communities which contain periods in the id. (LP #673152)
+
+- Allow embedded objects in intranets feature HTML. (LP #677497)
+
+- Don't allow unicode value of ``max_age`` to propagate into cookies emitted
+  on successful login (LP #674123).
+
+- Fixed dump of peopledir sections without any ``__acl__`` (LP #672744).
+
+
+3.50 (2010-11-08)
+-----------------
+
+- Added basic logging configuration to console scripts. (LP #670610)
+
+- Fixed bug which caused content feeds to break if an edited item was not
+  contained by a community. (LP #670967)
+
+- Add a peopledirectory report filter based on the 'is_staff' index.
+  and configure it as an addable in a report.  (LP #669523)
+
+- Make the jQuery UI dialog on Accept Invitation show an OK button
+  that isn't misaligned.  We have some pretty horrible CSS styling
+  going on where we have overridden <button> as a whole, rather than
+  in targeted places.  We have a buttongeddon coming at some
+  point. (LP #651279)
+
+- The same code is used to guess mimetypes for files uploaded to the
+  files tool is now used to guess mimetypes for files uploaded as
+  attachments to other content types, ie blog entries, wiki pages, et
+  al.  (LP #667494)
+
+- Added an evolve script to update mimetypes for community files with
+  generic, meaningless mimetypes to something more specific based on
+  file extension.  (LP #667494)
+
+- Attendees are now converted to to UTF-8 in the ical view for calendar events.
+  (LP #666295)
+
+3.49 (2010-11-02)
+-----------------
+
+- Harden 'deactivate_profile.html' view against missing user (LP #669451).
+
+- Fix 'show_profile_view' for case when user has never logged in.  (LP
+  #668352)
+
+- Suppressed "Admin" action on peopledir objects (LP #668489).
+
+- Added evolve script to clean up logins in user database.
+
+- Make "external" action URL detection work for HTTPS URLs (LP #661381).
+
+- Update feed code to read unicode from config file.  (LP #663403)
+
+- Repaired busted HTML in template used to view profile.  (LP #668350)
+
+3.48 (2010-10-28)
+-----------------
+
+- Improve descrption-extraction utility, avoiding a bug in older libxml2
+  and making it more lazy (LP #663399).
+
+- Made '/people' objects editable TTW by administrators.  See
+  https://blueprints.launchpad.net/karl3/+spec/ttw-people-configuration
+
+- Display last login time on main profile view, using relative time via
+  the 'timeago' jQuery plugin.
+
+- Record users' last login time on their profile.  Note that this requires
+  taking over control of the login form POST from the ``repoze.who`` form
+  plugin.  See https://blueprints.launchpad.net/karl3/+spec/last-login-date
+
+- Made profile's ``country`` field required, and added new ``XX`` country
+  code to account for unknown / blank items.  See
+  https://blueprints.launchpad.net/karl3/+spec/country-required
+
+- Changed label of text field in calendar events to 'Description' for all
+  occurrences in the user interface.  (LP #629663)
+
+- Added attachments to calendar event alerts. (LP #629663)
+
+- Load TinyMCE JS / CSS only on pages which need it (LP #622813).
+
+- Attempt to fix unclean kaltura embeds on IE8 (LP #658546).
+
+- Fixed content feeds to work with an instance not rooted at '/'.
+
+- When adding a new user, any previous invitations that user had are deleted.
+  (LP #659926)
+
+- Hide "Terms and Conditions" and "Accept Privacy Policy" fields in
+  the accept invitation form if there is no text to display for those
+  fields.  (LP #651209)
+
+3.47 (2010-10-07)
+-----------------
+
+- gave profile body a set width, so it doesn't fall out of its
+  area in IE (LP #638326)
+
+- put in correct version if corners.png, so IE will display the
+  background on feed actions (LP #629013)
+
+- removed IE calendar styles, that were actually breaking things
+  (LP #629026)
+
+- Removed Karl's implementation of Message in favor of the implementation in
+  repoze.postoffice.
+
+- Added a UI for deleting and requeueing messages in the postoffice
+  quarantine.  (LP #613424)
+
+- Removed unused formfield snippet from formfields.pt: add_comment-field.
+
+- Added evolve script to remove duplicate tags. (LP #627065)
+
+- Make sure top level validation error message shows on edit profile forms.
+  (LP #645614)
+
+- Make sure sequence fields can be highlighted when there are
+  validation errors.  Formish logically but not helpfully sets the
+  'contains-error' style instead of the 'error' style we were using in
+  our css.  Copied the .error styles for .contains-error. (LP #645614)
+
+- Implemented workaround to what should probably be considered a bug
+  in formish, to allow formish error messages to be visible for the
+  websites field when editing a profile. (LP #645614)
+
+- Added a UI for rename and merging users in the Admin UI.  (LP #629625)
+
+3.46 (2010-09-10)
+-----------------
+
+- fixed community filter buttons for Safari (LP #629010)
+
+- fixed up styles on profile page to make all browsers happy
+  (LP #634110)
+
+- Slightly reduced content area width to avoid content shifting
+  while browser zooming (LP #629577)
+
+- Fix 'delete_resource.html' view for content outside of communities
+  (e.g., profile photos). (LP #634139)
+
+- Derive ``creator`` for uploaded photo from the current user, rather than
+  the container's name. (LP #633191)
+
+- Improve contentfeeds description of content added / modified inside a
+  profile. (LP #628285)
+
+- Workflow initialization is now delayed for temporary images created by
+  Image Drawer when uploading images in the context of an 'Add Content' form.
+  (LP #619977)
+
+- Added fault tolerance for 'None' values from formish for blog entry
+  attachments. (LP #618074)
+
+- Fixed 'add_user' script to initialize workflow for new profile.
+
+- Added form validation to catch years earlier than 1900. (LP# 632451)
+
+- The groups KarlAdmin and KarlUserAdmin now have the same permissions
+  on profiles of inactive users that they do on active users.  This
+  means they can now edit inactive profiles as well as see inactive
+  users in searches and in the people directory.  Updated the admin
+  edit profile view to handle inactive users. (LP# 629612)
+
+- Inactive users now display a badge in their title, ie
+  'Fred Flintstone (Inactive)'.  This makes inactive users easier to notice
+  when viewing their profiles or when they appear in searches. (LP #629612)
+
+- Inactive users may now be reactivated via a link on the admin edit profile
+  form.  Reactivated users are sent a password reset email so they can reset
+  their password and log into the system.  (LP #629612)
+
+- Inactive users may now be reactivated via the upload new users as CSV
+  feature of the Admin UI.  (LP #629612)
+
+- When creating a new user using the add user form, if the entered userid or
+  email matches that of a deactivated user, an informative error message is
+  displayed and a link to reactivate the user is provided.  (LP #629612)
+
+- Removed cico package.  It was only be used by OSI for gsa_sync.  The code
+  needed by OSI has been moved to OSI's customization package.
+
+- Add existing members view now filters out inactive users.  (LP #629612)
+
+- In the invite new users view, if an email address matches that of a
+  previously deactivated user a validation error is raised.  (LP #629612)
+
+3.44 (2010-09-02)
+-----------------
+
+- Un-broke the ``manage_tags.html`` view due to clash over main template's
+  use of top-level ``tags`` name. (LP #629009)
+
+- Made sure icon is centered on filter indicator button. (LP #628833)
+
+- Fixed filter button display in IE. (LP #628281)
+
+- Merged ``ree-jsupgrade-2-tiny`` branch.
+
+  - Upgraded TinyMCE WYSIWYG widget.
+
+  - Upgraded jQuery libraries.
+
+- Merged ``chrissy-portlets`` branch:
+
+ - Updated intranet portlets to conform to site portlet styles
+
+ - Cleaned up Active People portlet
+
+ - Added DOCTYPE, so IE displays in standards mode
+
+ - Updated styles that changed as a result of adding DOCTYPE
+
+ - Moved portlets out of ``#center``, conforming styles for admin
+   pages, community pages, generic layout
+
+- Added ``--index`` option to ``reindex_catalog`` script, to allow rebuilding
+  only a given index.
+
+- Merged ``content_feeds2`` branch, adding top-level content feeds tab.
+  This tab allows users to see recent changes across all communities in
+  which they participate.
+
+- Merged ``active_communities`` branch, implementing the "active communities"
+  blueprint:
+  https://blueprints.launchpad.net/karl3/+spec/active-communities-tab
+
+- XSLT fix for people pages broken by unclosed divs. (LP #602889)
+
+- Fixed icons on people list page when FF zooms out.  (LP #624761)
+
+- Updated styles on Community Files page, new file icons.  (LP #622883)
+
+- Tags: set label to not look like a button, made tags, input
+  and button same height and/or centered vertically.  (LP #622689)
+
+- Tabs and newline characters in uploaded filenames are now converted to
+  spaces. Same is also done in the download_file_view when setting the
+  filename in the Content-Disposition header, in case there are files
+  uploaded previously with newline and tab characters in the filename.
+  (LP #616511)
+
+- Rename user script can now rename or merge profiles which don't have
+  logins.
+
+3.43 (2010-08-19)
+-----------------
+
+- Changes searches so there is no label, changed buttons to say
+  'search' instead of 'go'
+  (LP #616868)
+
+- Put in deprecation notice for IE6 (yay!)
+  (LP #616869)
+
+- Ensured that comment alerts work for comments made agaisnt forum posts
+  (LP #614370).
+
+- Ensured that CSV profile import decodes attributes encoded as UTF8
+  or latin1 (LP #614398).
+
+- Fixed text indexing of profiles with attributes encoded as UTF8 or latin1
+  (LP #614398).
+
+- Added a community index to the tagging enginge in order to speed up the
+  community tags portlet when first loaded. On local machine loading of
+  community tags portlet with OSI database went from 40s to 3ms.
+
+- Wrote an evolve script to find content that is created or modified by a user
+  no longer in the system and move that content over to a 'former user'
+  profile.  The 'former user' profile is created if and only if it is needed.
+
+- Improved search performance by not using the catalog cache for very large
+  result sets, as the overhead in marshalling the result set in order to cache
+  it is much greater than the overhead of running the search.  (LP #6120123)
+
+- Added postoffice quarantine to error monitor admin ui for parallelism with
+  the status view for monitoring.  (LP #613579)
+
+- Mailin now concatenates all 'text/plain' message parts when constructing the
+  document body.  Previously only the first 'text/plain' message part was used.
+  This is per discussion with OSI about including forwarded messages in mailin.
+
+- The text scrubber used for mailin now takes a new argument, 'is_reply',
+  indicating whether the message is a reply to another email.  This is checked
+  by looking for the presence of the 'In-Reply-To' header in the message.  If
+  the message is not a reply, the text_scrubber now omits the processing
+  where it attempts to separate the new message body from the quoted message
+  being replied to.  This processing was causing messages being forwarded to
+  Karl communities to be stripped of content, since for some email clients
+  (Outlook Express) the separator for replied to messages and inline forwarded
+  messages is the same.  Since a forwarded message shouldn't have the
+  'In-Reply-To' header set, this allows forwarded messages to be properly added
+  to Karl, while still doing the proper thing when users make comments by
+  replying to alert emails.  Based on discussion with OSI.
+
+- Updated the 'add comment' form to respect the IShowSendalert adapter.
+  (LP #602889)
+
+- Converted retry functionality used when running console scripts as daemons to
+  be time based rather than number of iterations based.  By default, now, if
+  a daemon script gets ConflictErrors, it will retry once a minute for 30
+  minutes.  If unable to fulfill its duties for 30 minutes, it will raise an
+  exception which will trigger all of the usual alarm bells. (LP #614368)
+
+- Replaced the notion of deleting users with the notion of deactivating users.
+  Deactivated users are effectively deleted except that their profiles may
+  still be viewed by clicking a link on content which the deactivated user
+  had authored.  LP #599805
+
+- Fixed bug (found by random code review) in community stats report where
+  calendar events were not counted.
+
+- Created user activity report.  LP #599804
+
+3.41 (2010-08-04)
+-----------------
+
+- Fixed missing asterisk typo in ProfileEditFormController.handle_submit.
+  (LP #612503)
+
+3.40 (2010-08-03)
+-----------------
+
+- Fixed a bug in mailin where we were trying to decode headers twice, once in
+  repoze.postoffice, and then once again in our processor.
+
+- IE8 button display fixes (LP #610549)
+
+- Merged status views for error monitor and postoffice quarantine, for easier
+  monitoring by SFUP.
+
+- Fixed bug in default layout provider: wrong template being called for
+  intranet layout. (LP #612576)
+
+3.39 (2010-07-29)
+-----------------
+
+- reduced width on login username input for IE6, so it doesn't
+  fall to the next line.  Set margin on surrounding field as
+  !important, because elements were jumping after focus was moved
+  away (LP #611017)
+
+- removed unnecessary margin from profile image, so the middle content
+  doesn't get pushed down (LP #610666)
+
+- fixed add tag button on edit screen for IE8 (LP #610549)
+
+- edited the admin right side portlets to match new portlet styles (LP #610493)
+
+- Added support for logging each query, to compare performance across
+  different configurations. Keyed on the `query_log_all` parameter, defaulting
+  to False. Entries will be added to `log/query/everything.log`.
+
+- Fixed bug in mailin2 script that caused ZEO connections to be left open if
+  there was a configuration error.
+
+- Fixed bug in entity conversion where numeric entities were not converted.
+
+- Removed a redundant copy of the text_scrubber code used by mailin.
+
+- Add some preprocessing to the mailin text scrubber to find URLs and mark
+  them up as links using markdown syntax.  (LP #545420)
+
+- Reproduced the websites normalization performed when editing a profile via
+  the UI in the cico XML import, so that profile websites data downloaded from
+  GSA will also be normalized by prepending 'http://' to websites which begin
+  with 'www.'.  Also added an evolve script to normalize the websites field for
+  existing profiles.  (LP #605203)
+
+- Convert non-standard mimetypes sent by Internet Explorer for jpeg and png
+  image files to their more standard equivalents.  (LP #608473)
+
+- Made all unknown image/* types viewable in default mime info.  (LP #608473)
+
+- Added a utility and console script for renaming users. (LP #606339)
+
+- Removed link to __error_log__ from admin ui.  (LP #581949)
+
+3.38 (2010-07-09)
+-----------------
+
+- removed extra div#footer, so there are not multiple ids (LP #602889)
+
+- LP #602888: Change titles on some People reports.
+
+- LP #601109: Remove code and template for sending email after changing
+  password.
+
+- LP #566594: Help text for imagedrawer.
+
+- slightly reduce margin on #right to prevent layout from
+  breaking when font size is changed (LP #602837)
+
+- Fix handling  of 'website' in admin CSV user upload. (LP #602473)
+
+- tempfolder:  suppress sending events on add / remove, and therefore
+  any catalog activity for objects in the temporary location. (LP #592697)
+
+
+3.37 (2010-07-06)
+-----------------
+
+- further cleaning up of portlet styles to make them all the same (LP #599522)
+
+  - set up related tags portlet and its .rightcol space to be styled like the
+    other portlets in the site.
+
+  - removed now unused CSS code.
+
+  - gave .rightcol a left margin to put space between the portlet and text
+
+  - reduced space above and below portlet title
+
+- cico people import:  fixed the fix for singular 'website' element
+  transform (LP #601205).
+
+- tagging engine:  optimized 'getFrequency' (LP #597838).
+
+- upload users view:  don't pass 'groups' to profile factory (LP #598246).
+
+- portlet styles - cleaned up CSS for status message,
+  applied new styles to profile tags portlet (LP #599522)
+
+- general cleaning up of themedstyles.css for legibility
+
+  - conformed way the code is laid out
+
+  - fixed small errors
+
+- Styled the site announcement to look like a status message. (LP #600765)
+
+- Updated mailin code to respect X-Postoffice-Rejected headers coming from
+  repoze.postoffice and special cased the bounce message when a message is
+  rejected to due to vacation loop detection throttling. (LP #597835)
+
+- hid the overflow on the main content area, so that when wide items are
+  entered, the entire content area won't fall beneath the left menu in IE.
+  (LP #576042)
+
+3.36 (2010-06-27)
+-----------------
+
+- Fixed UI bug where actions in folder views did not correspond to user's
+  permissions.  (LP #594180)
+
+- Added evolve script to remove some broken objects that seem to be left over
+  from the migration of profile photos to image drawer.  These were blocking
+  reindexing of profiles.  (LP #594131)
+
+- Fixed bug where profiles add via cico (OSI, using gsa_sync) were indexed with
+  a bogus value for the 'allowed' index. Updated evolve script to reindex the
+  people directory.  (LP #594131)
+
+- Added stub for console script, reindex_peopledir.
+
+- Fixed bug where 'home_path' was being clobbered by edit profile form.
+  (LP #594127)
+
+- Updated the rss feed update code to only update a feed if the upstream feed
+  contains entries.  (LP #594352)
+
+3.35 (2010-06-08)
+-----------------
+
+- Members views were not updated to use the new websites field after multiple
+  websites change from 3.34, which caused an unexpected parameter error when
+  creating a new profile after invitation. Fixed and updated tests. (LP #591267)
+
+- Fixed bug in whitelist--address matching is now normalized to be indifferent
+  to the inclusion or exclusion of a name part with an email address.  (IE,
+  'Fred Flintstone <test@example.com>' == 'test@example.com')
+
+3.34 (2010-06-04)
+-----------------
+
+- Updated formatting for wiki body in e-mail alerts (LP #588905)
+
+- Added a ``site_announce`` script to set / clear the site announcement
+  text from the command line (LP #579520).
+
+- Ensured that wiki pages cannot be added outside of the wiki tool
+  (LP #586458).
+
+- Made profiles support multiple websites (LP #554018).
+
+- updated maintenance page (LP #587432)
+
+- Changed HTML ID for email icon in blog listing for customizations
+  (LP #582500).
+
+- Added custom.css link into wsgi_errormsg.pt (LP #587104).
+
+- Duplicated views from old mailin monitor as new views which use postoffice.
+  Admin UI will point to new views if repoze.postoffice is being used,
+  otherwise it will still use the old views.
+
+- LP #588303 Added fax to profile view.
+
+- LP #589743 Form topic add comment form was still assuming old formencode
+  system.  It has been updated to be current.
+
+- LP #589814 Fixed broken add user form.
+
+- LP #554018 Added special case in cico for website in profile import. (Used by
+  OSI's gsa_sync.)
+
+3.33 (2010-05-24)
+-----------------
+
+- Work around chameleon bug where the new ``next`` builtin in Python 2.6.x
+  was shadowing the value passed from the view, breaking the Twill tests
+  (and the reference manual views) under Python 2.6.x (LP #534599).
+
+- Add community and profile statistics to admin UI.
+
+3.32 (2010-05-20)
+-----------------
+
+- Fixed bug where lemonade could not determine content type of reference
+  manuals.
+
+3.31 (2010-05-20)
+-----------------
+
+- Added a hook inside ``karl.models.site.Site.update_indexes`` to allow
+  extension or customization packages to extend the set of indexes used
+  in the catalog.
+
+- Made the "view all" view work for reference sections (LP #575712).
+
+- Allow nesting of sub-sections within reference sections (LP #575712).
+  Also allow adding pages and files at the root of reference manuals, making
+  them behave like reference sections.
+
+- The rtf converter now cleans up pict_dir directories left behind
+  by rtf2xml (LP #579511).
+
+3.30 (2010-05-06)
+-----------------
+
+- Changed wording of title field on file edit screen to remove mention
+  of nonexistent checkbox (LP#575789).
+
+- Calendar event, blog entry, newsitem, page, reference add behavior
+  tweak (LP#576033).
+
+- Batching in syslog view (LP#563745).
+
+- LP #575276 File view now uses generic layout when outside of a community.
+
+- Removed deprecated code that supported old profile pictures.
+
+- LP #571221 Cache results of file text extraction on the model, to make
+  reindexing faster.
+
+3.29 (2010-04-30)
+-----------------
+
+- Added an "Any" option at the end of the letterbox to allow clearing
+  any existing filter (LP#/570853).
+
+- On each communities sub-view, add a "quick links" panel on the right
+  margin, with tabs showing tool links, recent content, and members.
+  The last two are fetched on demand using AJAX.  This panel is currently
+  disabled unless 'demo' is in the query string. See
+  http://dev.karlproject.org/specifications/communitydiscovery.html#step-2-quick-links
+
+- Implemented sub-views for the '/communities/' page:  "Mine" (communities
+  of which I am a member), "Active" (communities having acitivty within
+  the past 30 days), and "All".  Drop the "My communities" portlet.  This
+  menu is currently disabled unless 'demo' is in the query string.  See
+  http://dev.karlproject.org/specifications/communitydiscovery.html#step-one-dedicated-views
+
+- Add "Community" to list of types in advanced search (LP#571218).
+
+- Add 'fax' field to user profiles (LP#570204).
+
+- Don't blow up when managing tags from profile when no tags are
+  present for the profile (LP#558743)
+
+- Created new version of mailin script (mailin2) which uses the experimental
+  repoze.postoffice package for a central mailin depot.
+
+3.28 (2010-04-22)
+-----------------
+
+- Introduce trivial AttachmentsSequence widget, along with slight markup and
+  javascript tweaks, to get the attachment field on the various formish forms
+  to work more like the pre-formish implementation (see LP#564130).
+
+- Get intranets root edit form to correctly default to the sample_feature
+  value when the feature field is left blank.
+
+- TemplateAPI object now sets an 'error_message' attribute for formish
+  form submission requests w/ validation errors; templates will notice
+  this and render a top-of-form error message (fixes LP#564134).
+
+- Improve usability on the formish 'sendalert' fields (see LP#564131).
+
+- Re-specify default 'sendalert' value as True on calendar event add form
+  (fixes LP#564115).
+
+- Add "overflow: auto" to the #right div CSS to prevent bad rendering when
+  poorly formed (read: very long words w/ no word break, e.g. a long URL)
+  content is pulled into a side portlet (fixes LP#540296).
+
+- Slight tweaks to the Network Events search UI and behavior to improve user
+  experience (see LP#554028).
+
+- Sacrifice a chicken and provide a default value for the 'min_pw_length'
+  setting since certain invocations of the test framework cause that to not
+  yet be initialized.
+
+- Remove FormEncode and repoze.enformed dependencies and all dependent code.
+
+- Convert change password form to formish.
+
+- Convert calendar setup form to not use FormEncode / repoze.enformed.
+
+- Convert calendar event add / edit forms to formish.
+
+- Convert comment add / edit forms to formish.
+
+- Convert reference section add / edit forms to formish.
+
+- Convert reference manual add / edit forms to formish.
+
+- Convert password reset request and confirm forms to formish.
+
+- Converted profile and news item photos to use the newer, image drawer
+  compatible image and thumb nails.  Deprecated and removed older image
+  handling code previously used to support these.
+
+- LP# 544199 Fixed KeyError in Admin Delete Content view when nested nodes are
+  selected for deletion.
+
+- LP# 544199 Added 'path' to content selection grid used in some admin views.
+  Changed sort index to 'path' for content selection grid.
+
+- LP# 567532 Added a 'view' link to the show file view, in addition to the
+  already existing 'download' link.
+
+3.27 (2010-04-08)
+-----------------
+
+- Add evolve script to retroactively prepend 'http://' to any profile website
+  URLs that start with 'www.' (see LP#554013)
+
+- Fix profile admin edit form so that the community memberships don't
+  disappear when the groups are updated (fixes LP#556679)
+
+- Slight tweak to the KarlManageMembers widget so it won't blow up when
+  faced with a community that has no members
+
+- Profile 'website' field now requires submitted values to start with
+  'http://', 'https://', or 'www.'; if the last one is used 'http://' will be
+  prepended to the stored value (fixes LP#554013)
+
+- Re-add "default tool" dropdown to the add community form
+  (fixes LP#554031)
+
+- In order to be able to kill runaway converter processes correctly,
+  change ``karl.utilities.baseconverter.BaseConverter.execute``: when
+  creating a subprocess, don't use a shell to start the process
+  (``shell=False``), use ``subprocess.PIPE`` as stdin, use
+  ``subprocess.PIPE`` as stderr.
+
+- Change converters that use ``execute``: don't try to redirect stderr
+  output via the command.
+
+- Change rtf2xml converter to not change directory to /tmp (not sure
+  why it was doing that in the first place) as part of its execute
+  command.
+
+- Change rtf2xml converter to not pass ``--no-dtd`` on the command
+  line.  This option has no effect on any recent rtf2xml command I can
+  find.
+
+- LP #552517: Fixed bug where new uploads w/ the same filename would fail
+  to actually update the stored file.
+
+- LP #553959 Fixed bug in edit_intranet form that would corrupt the portlets.
+
+- LP #554024 Changed the 'delete community' operation to use a new permission,
+  'delete community' rather than overload the 'moderate' permission.
+
+- LP #556673 Only display buttons to add calendar events if user has permission
+  to create events in the calendar.
+
+- LP #556036 Get static revision from subversion revision, if possible.
+
+- LP #510248 Hide 'Advanced' button on folders outside of intranets.
+
+3.26 (2010-03-26)
+-----------------
+
+- LP #548352 Fixed bug which caused alerts to fail if a community had a comma
+  in it's title.
+
+- LP #548352 Fixed bug in error monitor where log messages containing unknown
+  character encoding data could render the log unviewable.
+
+3.25 (2010-03-25)
+-----------------
+
+- LP #546902: Removed the 500 character limit validator from the 'text'
+  field on the community member and new user invite forms.
+
+- Fixed a failing unittest for mailin dispatcher.  Did not affect production
+  usage.
+
+3.24 (2010-03-22)
+-----------------
+
+- LP #532879 Added a try/except block to catch ParseError exceptions
+  in JQuery live search view to avoid contaminating error logs with
+  ignored exceptions.
+
+- The wiki links would not work for non-ascii characters because the
+  title was saved as unicode and the text as html entities, causing
+  the link matching code to return zero matches. Added function to
+  unescape entities from links before comparison to fix this.
+
+- LP #530799 (partial): Converted the following forms to use formish
+  instead of enformed for form generation and validations: profile edit,
+  admin profile edit, add user, add news item, edit news item, add
+  intranet, edit intranet, edit intranets root, add page, edit page.
+
+- LP #544201 Added check for 'create' permission on target for mailin.
+
+3.23 (2010-03-16)
+-----------------
+
+- LP #538272: Fixed add / edit community forms to pass the page_title
+  in to the TemplateAPI object instead of directly to the template.
+
+- LP #533366 Added simple retry capability to run_daemon, primarily to
+  avoid tripping the error monitor when conflict errors ocurr.
+
+- LP #538273:  Added a '--timeout' option to 'update_feeds' script:  if
+  passed, sets the global socket timeout accordingly.
+
+3.22 (2010-03-12)
+-----------------
+
+- LP #530893 Updated mail sending code to use repoze.sendmail 2.0.
+
+- LP #520570:  redirect '/favicon.ico' requests onto the correct static
+  URL, and 'rss_view.xml' requests to the equivalent 'atom.xml' URLs.
+
+- LP #530893 Added handling for RFC 2047 (Unicode) headers to all generated
+  emails.
+
+- LP #530893 Added handling for RFC 2047 (Unicode) headers to mailin.
+
+- LP #531360 Fixed bug in people import where categories were not being
+  properly reset at import time.
+
+3.21 (2010-03-06)
+-----------------
+
+- Created a default policy for IShowSendalert.  Refactored code to use a
+  utility method, get_show_sendalert, to get whether or not to show a send
+  alert checkbox in a form adding content.
+
+3.20 (2010-03-04)
+-----------------
+
+- Updated bootstrap to provide new 'name' parameter to add_intranet_view when
+  creating offices.
+
+- LP #530966, CSS fix for profile bug.  (Derek via Paul)
+
+3.19 (2010-03-02
+----------------
+
+- LP #526574: Fixed the workflow association with the forum topic add and edit
+  views so the creator of the topic will have edit / delete permissions;
+  added evolve6.py function to fix existing topics. (rafrombrc)
+
+- LP #497017: Added a separate 'name' field to the intranets add form
+  (rafrombrc)
+
+- LP #528514: Specified the right widget type for blog post 'send email?'
+  field, added CSS to make the formish title fields the right size. (rafrombrc)
+
+- Fixed bug with people import where updating a profile might use a different
+  user id than the profile.__name__.
+
+- LP #522179: Added template slots and admin UI for generating announcement
+  blurbs that will be exposed to all site users. (rafrombrc)
+
+- LP #523280: Rejigger formish views and templates to put page_title value in
+  TemplateAPI object instead of passing it directly into the template
+  (rafrombrc)
+
+- LP #520541 Updated adduser console script to also create a user profile.
+  Added checks to avoid clobbering an existing user.
+
+3.18 (2010-02-22)
+-----------------
+
+- Fix for memory leak in mailin process.
+
+- UI fixes.  (ree)
+
+
+3.17 (2010-02-17)
+-----------------
+
+- LP #503451: Calendar: Week view does not display some events
+
+- Fixed calendar list view to correctly show "all-day" for all-day events.
+
+- LP #522173: Add a "down for maintenance" HTML page in views/static
+  with relative links to styling and images which can be served
+  directly by Apache.
+
+- When importing users, using cico, any space characters in the user's id are
+  now elided.
+
+- LP #523333: find_contiguous_slot error error in calendar
+
+3.16 (2010-02-12)
+-----------------
+
+- Add "evolve5" step which converts calendar layers and categories to
+  have opaque object ids.
+
+- Made the (+) on all-day events on the calendar day and week
+  views functional.
+
+- Fixed links to all-day events on the calendar day view.
+
+- LP #510242: change submit buttons to say "submit" (as has been the
+  case in previous releases) rather than "Edit" or "Add".
+
+- LP #510770: Sort categories by title rather than path.
+
+- LP #510304: Add/edit calendar event should show default category
+  first always.
+
+- LP #513340: Calendar event blocks not formatting correctly in IE
+
+- LP #510240: Formish edit screens have wrong heading
+
+- LP #506106: "accept invitation" refused with password length error
+  no matter what password length provided.
+
+- LP #510187: Get the display for per-office data in People reports to
+  match the previous layout.
+
+- LP #497437: Fixed all-day event option for calendar events.
+
+- LP #503442: Fixed hardcoded year left in calendar week view template.
+
+- LP #510285: Use opaque identifiers for new category and layer ids to
+  make it possible to add a category with the same label as a layer
+  and vice versa.
+
+- LP #509597: IndexError on Calendar _find_contiguous_slot_across_days
+
+- LP #503451: Fixed multi-day calendar event not on both days.
+
+- LP #503771: Fixed day links on calendar list view.
+
+- LP #503523: AttributeError: 'CalendarEvent' object has no attribute 'color'
+
+- LP #503450: Fixed that the hour and minute selectors on the add calendar
+  event page would lose their all-day state if the user entered an end date
+  that was before the start date.
+
+- LP #496331: Calendar list view now shows a paginated listing of upcoming
+  events with 20 events per page.
+
+- Merged svn+ssh://osi@osi.agendaless.com/home/osi/bfgsvn/karl/branches/formish
+  branch, which replaces some form-based views with formish forms.
+
+- LP #496381: Calendar event duration must be at least one minute.
+
+- Added missing registration for IFileInfo adapter for ICommunityRootFolder.
+
+- Fixed bug in evolve2 step that updated 'Last Activity' for every community.
+
+- Added missing view registrations for mailin monitor utility.
+
+- Fixed bug with attachments on mailin caused by a bogus assertion which would
+  usually fail.
+
+- Bug fix: Make sure acl's are properly set on profiles during import.
+
+- LP #494582 Added opensearch support to people directory.  (Ported from OSI.)
+
+- Bug fix: Make sure custom_folder_view uses get_layout_provider utility
+  method.
+
+- Explicit registration of an IFolderAddables is no longer required.  A
+  suitable default is found if there is no registration.  Added
+  'get_folder_addables' utility method.
+
+- Created a default footer that just contains the offices listing component of
+  OSI's footer.
+
+- Bug fix: Allow add/edit forms for calendar event to still work if there is no
+  category.  Categories are not used outside of the context of the calendar
+  tool, and calendar events can appear in regular old folders in intranets.
+  This allows to again create and edit events in the 'network-news' folder used
+  in most intranets..
+
+- LP #497937 Corrected which tools are addable when creating a new community.
+
+- LP #488152 Made initial site_acl used in boostrapping the same in core as
+  what OSI uses.
+
+- LP #488854 Added link to delete user in admin edit profile view.
+
+- LP #505939 Fixed bug when trying to render edit form for calendar events that
+  occur in a 'network-events' folder rather than a calendar.
+
+- LP #510194 Fixed people directory report columns to properly handle None
+  values.
+
+- LP #510193 Fixed indentation for IE in people directory.
+
+- LP #510204 Removed height constraints on ui grid layouts.
+
+- Added an administrative UI in order to have a central place for functions
+  useful to Karl administrators.
+
+- Added syslog functionality.
+
+- Added a monitor utility for errors in various Karl subsystems.
+
+- Fixed bug in workflow where unicode was breaking status messages.
+
+- Fixed bug in karl.views.utils._get_user_homepath.  Was expecting traverser
+  to return a list for subpath but traverser was returning a tuple.
+
+- Fixed bug displaying "system" profiles.  Karl instances generally have one
+  system profile, "admin", that does not have an entry in site.users, since
+  the profile is not used to log into the site but only as a placeholder user
+  profile for associating with events generated by the system, usually when
+  bootstrapping a new Karl.
+
+- Exclude objects which don't provide IContent from 'texts' catalog index.
+  (Only content objects should show up in search.)
+
+- Added specific exclusion for ICalendarLayer from 'texts' catalog index.
+
+- Fixed bug with mailin quarantine monitor generating bad links to quarantined
+  messages.  Ended up taking entirely different approach to mounting the
+  repoze.mailin.monitor subapplication.  Implementation this time around is
+  messy but should look prettier when BFG 1.3 is ready.
+
+- Added daemon mode to scripts that were being called as cron jobs: mailin,
+  qp, update_feeds, and digest.
+
+3.15 (2009-12-14)
+-----------------
+
+- LP #496330: Clicking the (+) from the calendar month view now uses
+  a default of 9:00am instead of 12:00am.
+
+- LP #494701: Editing a calendar event now populates the form with
+  the correct times.
+
+- LP #492346: Clicking the (+) button to add a new event on the calendar
+  views now populates a default date and time on the form based on the
+  context of where (+) was clicked.
+
+- LP #491991: An event's calendar category is now displayed when
+  viewing the event.
+
+- LP #491986: Constrain width of category selector on calendar setup page.
+
+- Increase performance of jQuery selectors in calendar daily/weekly view
+
+- Fix editing of calendar categories/layers when names have spaces
+
+- Calendar categories and layers are now managed on the same setup page.
+
+- Preload button images better so that they don't flickr on hover/click
+
+- Change calendar "Add Event" button to not be an image so that it is easier
+  to test and change the label if needed
+
+- Speed up rendering of any page shown inside the community layout by
+  roughly 2X.
+
+- LP #444502: Added a sample content generation script.
+
+- "Settings" action on calendar tool now allows the choice of a color
+  along with a virtual calendar name.
+
+- Add a new field index named "virtual" to the catalog.  The initial
+  use for this index is to be able to query for catalog events
+  globally for the purposes of creating a "dynamic" calendar: the
+  ``virtual`` index, for catalog events, will be populated with a
+  tuple: ``(calendar_path, virtual_calendar_name)``.  This tuple can
+  be used in queries by the dynamic catalog machinery (which will need
+  to spell out a set of tuples naming these calendars, and query the
+  "virtual" catalog field index using the tuples in an OR clause along
+  with, e.g. ``interfaces=(ICatalogEvent,)``.
+
+- If a user doesn't have an associated profile, don't fail hard
+  when trying to reindex the peopledir catalog.
+
+- LP #434879 Add support for pasting into livesearch
+
+- The RSS icon on the new calendar views is now placed on the lower
+  right for consistency with the other pages.
+
+- Removed the "View Earlier Events" and "View Later Events" from
+  the list view on the new calendar.  These duplicate the functions
+  of the forward/backward buttons and are not necessary.
+
+- The "Settings" page of the existing calendar has been temporarily
+  hidden on the UI until the new calendar is finished.  Requested
+  by Jason Lantz to prevent confusion.
+
+- LP #430037 In karl.content.adapters, use functions in
+  ``karl.utilities.converters`` instead of an xslt-using function
+  named ``_html_cleaner``.  The ``_html_cleaner`` was producing
+  incorrect results when fed HTML provided by the rich text input
+  widget.
+
+- Moved "karl.content" into this package (as the content subdirectory).
+
+- LP #418687 Add better looking status messages
+
+- LP #418701 Add better styling of form buttons
+
+- LP #356541 Added better icons for file/folder listings including Folder,
+  Reference Manual, Page, Calendar Event, and News items.
+
+- Updated edit_acl view to allow workflow transitions, including re-inserting
+  an object with a previously customized acl back into a proper workflow state.
+
+- LP #426385 Added a few extra parameters to template call for
+  admin_edit_profile view.  Extra paramaters used by OSI custom template.
+
+- The ID of an uploaded should not include directory names provided
+  by the browser, if any.  This was solved previously for Windows but not
+  for POSIX (forward slash) path names.
+
+- The new calendar pages have now replaced the original calendar.
+
+- LP #449690 Moved text scrubber utility for mailin to core.  Moved mailin
+  monitor sub-application to core.
+
+- Removed out of date paster template.  This has been superceded by KarlSample
+  project.
+
+- Made setting of categories via peopleconf util optional.  OSI will set
+  categories via gsa_sync, so peopleconf needs to be able to handle the
+  categories and reports separately.
+
+- Removed all references to ISecurityWorkflow, in favor of newer worfklow
+  system.
+
+- LP #449686 Moved workflow policy to core.  All known Karl instances were
+  using the same policy, so for maintenance it makes sense to move this to
+  the core.  Since the workflows are hooked up via ZCML these "default"
+  workflows can always be overridden in a customization package.
+
+- LP #449676 Moved most console scripts into core to avoid duplication across
+  all of the customization packages.  Entry points are still declared in
+  customization packages to allow partners to opt out of or replace particular
+  console scripts.
+
+- LP #449683 Moved initial data for bootstrapping Karl in the core and made
+  overridable via utility registrations on the interfaces in
+  karl.bootstrapping.interfaces.
+
+- LP #449683 Moved Paste Deploy application factory (aka run.py) into core (as
+  application.py).
+
+- LP #449691 Moved evolve script to core and updated it to use utility
+  registrations in ZCA to find packages to evolve.  This allows us to maintain
+  a set of evolution steps inside the core that would be common to all
+  instances of Karl while still allowing for customer specific evolutions in
+  the customization packages.
+
+- LP #449683 Evolution DB versions are now set at bootstrap time, whether
+  called from application.py or the startover script.  The startover script
+  has been moved to core.
+
+- LP #449689 Added standalone.zcml for running Karl without a customization
+  package.
+
+- Moved OSI's notion of 'intranets' (aka offices) into core Karl for use by
+  other Karl instances.
+
+- LP #491984 Fixed bug where folder contents deletion warning was being used
+  for any folderish object rather than just folders under the Files tab.
+
+- LP #492382 Added an argument for the form class to admin_edit_profile_view,
+  allowing third party customizations to still use the view logic and just
+  change the form validation.
+
+3.14 (2009-09-08)
+-----------------
+
+- Hide all states in workflow UI that aren't current and have no valid
+  exit transitions.
+
+- Fixed error message in error page middleware.
+
+- Merged 'chrism_workflow' branch.
+
+- LP #418695 Bold communities for which logged in user is moderator in "My
+  communities" portlet.
+
+- LP #422571 Added convert_entities function to karl.views.utils.  Updated atom
+  entry adapters to convert entities in content.
+
+- LP #422572 Made some changes to atom feed based on feed validator
+  recommendations: Added "updated" element to feed.  Added rel="self" attribute
+  to "link" elements.
+
+- Fixed bug discovered in alert digests--email recipients were not being
+  properly passed as a list.  Digests could not have worked at all.  Surprised
+  there was no bug report.  (15 users in OSI have alert preferences set to
+  digest.)
+
+- LP #422586 Enabled alert digests to send attachments via email.
+
+3.13 (2009-08-26)
+-----------------
+
+- Ignore emails with a header that indicates they were auto-generated,
+  such as out of office replies.  Like Mailman, Karl now looks for the
+  non-standard but widely supported Precedence header, as well as the
+  new, standard Auto-Submitted field.
+
+3.12 (2009-08-19)
+-----------------
+
+- LP #413137 Export as CSV was producing a unicode header; WSGI only accepts
+  byte strings.
+
+- LP #399427 Removed send_alert field from ICommunityContent interface.
+
+- LP #399427 Allow use of default for Alerts utility, making registration
+  unnecessary except to shim in a dummy test implementation in unittests.
+
+- LP #412463 Publish atom feeds as escaped HTML rather than embedded XHTML.
+
+3.11 (2009-08-17)
+-----------------
+
+- LP #414799 Made system name configurable in Karl error page wsgi middleware.
+
+- LP #414799 Scrubbed 'KARL' from UI.
+
+3.10 (2009-08-12)
+-----------------
+
+- LP #412478 In mail-in, replace empty message body with warning message.
+
+3.9 (2009-08-11)
+----------------
+
+- LP #408946: Give visual LS feedback and pause on multiple words
+
+- LP #409495: Fix broken General KARL Error Screen in IE
+
+- Disabled browser form autocomplete in the add user form (without this,
+  the browser fills the password field with the current user's password).
+
+- Log more info about dropped email messages.
+
+- Made the mail white list case-insensitive.
+
+3.8 (2009-08-06)
+----------------
+
+- Removed OSI-specific change password link logic from edit_profile view.
+
+- The peopleconf utility now has the option to force reindexing of the
+  people directory catalog.
+
+- LP #409408: IE refuses to download files over HTTPS when the
+  Cache-Control header specifies no-cache or no-store.  Switched to
+  "private, must-revalidate", which seems to be the generally
+  recommended header for dynamic apps.
+
+- LP #409499: Reference Manual delete produces TypeError
+
+
+3.7 (2009-08-04)
+----------------
+
+- LP #407445: Provide rounded corners on tag boxes in IE
+
+- LP #403648: Fix right margin in IE on anonymous layout
+
+- Use the newer ISecurityWorkflow API (pass request in to all relevant
+  methods).
+
+- LP #404205: For the new people directory, renamed the unconfigured
+  "All KARL" tab to "All".  Use peopledirectory.xml to configure it.
+  Also added the ability to filter reports by arbitrary (but fixed)
+  catalog query parameters.
+
+- LP #408156: Added a catalog index that makes it possible to show
+  only non-staff in a people directory report.
+
+- LP #405361: Selecting a letter in the new people directory did not
+  survive pagination.
+
+- Partial solution to LP #407017: disable autocomplete in
+  admin_edit_profile.html and validate changes to home_path.
+
+- Added reverse look up for countries.
+
+- LP #407510: Show all fields in admin_edit_profile.html.
+
+- Enabled text relevance ranking in search results.
+
+3.6 (2009-07-23)
+----------------
+
+- Use resources rooted in "static" rather than in "static/custom";
+  anything in static is allowed to be overriden.
+
+- LP #400732: Reorganize and cleanup CSS to reduce file size and
+  complexity.
+
+- Use a start-time versioned URL for static resources.  This implies
+  that the "static_postfix" setting is no longer required (the version
+  number is generated and consumed by the system itself, rather than
+  requiring a version number to be set in configuration).
+
+- Use a 5 year static resource expiration time to work around browser
+  caching bugs.
+
+- Use "repoze.enformed" package to do form validation and rendering;
+  "form" templates are now inlined into their constituent "real"
+  templates.
+
+- Made FakeEmailDelivery quiet by default.
+
+- Better fault tolerance when killing processes using Python < 2.6 via
+  utilities.baseconverter._ProcTimeout
+
+- Made the name of the logo image configurable (so that it can be a PNG
+  rather than a GIF).
+
+- LP #398940, LP #398951: Added spelling checker for TinyMCE editor.  This
+  requires the ``aspell`` command.  Please see the buildout README.txt for
+  instructions on installing Aspell.
+
+- Moved the ``ok.html`` and ``zodbinfo.html`` views to karl core since
+  all partners need them.
+
+3.5.1 (2009-07-17)
+------------------
+
+- LP #400767: Fixed AttributeError on activity listings.
+
+3.5 (2009-07-16)
+----------------
+
+- LP #383666: Paste from Word to blog posts emails content but drops from
+  blogentry
+
+- LP #398914: Scale and crop uploaded profile photos to fit 75 x 100.
+  The original image uploads are available under the name
+  "source_photo", for example, /profiles/admin/source_photo .
+
+- LP #390767: In the recent activity list, show the person who edited,
+  rather than the original creator.
+
+- LP #396581: Most links to a comment should show the comment in context.
+
+- LP #397196: Added a page that links to admin tools (/static/admin.html)
+
+- Updated paster template.
+
+- LP #399396: Fix styling on list items.
+
+- LP #399408: Reformat Network Events portlet to better display long titles
+
+3.4 (2009-07-09)
+----------------
+
+- LP #394355: Don't commit changes to sqlite "pending messages" table if
+  ZODB raises a conflict error.
+
+- LP #391264: Added an administrator-level user edit view.
+
+- LP #391259: Added an administrator-level user add view.
+
+- LP #397030: Use quarantine for messages that fail to process during mail-in.
+
+- Got rid kludgy '.error' file for mail-in, since the quarantine renders it
+  obsolete.
+
+3.3 (2009-07-06)
+----------------
+
+- Add fault tolerance to mail-in for message bodies with unknown non-unicode
+  character encodings.
+
+- Add a ``karl_project`` paster template (unfinished) in order to
+  bootstrap a KARL customization.  The code used is an amalgam of
+  Tres' ``non_osi_template`` package updated with recent changes to
+  the OSI package.
+
+- Forward compat: use the "repoze.bfg.view.static" helper rather than
+  rolling our own view to serve static files in karl.views.site.
+
+- LP #392561:  get 'content_modified' set correctly on communities when
+  adding content.
+
+- LP #391234:  Use a non-forked version of the repoze.who auth_tkt plugin
+  (repoze.who 1.0.15, now in the "lemonade" index has the "max age" feature
+  which made this fork necessary).
+
+- LP #391246:  Removed concept of "vocabularies" as a persistently stored
+  thing with indirection.  Placed countries data in core karl package as
+  const data.
+
+- LP #390868:  Updated OSI logo.
+
+- LP #384841:  Add 'use_cache' kw argument to CachingCatalog to disable
+  cache for particular searches.
+
+- LP #391377: Moved settings such as 'system_email_domain' to karl.ini.
+
+- Stop using a custom KarlSecurityPolicy; this policy was identical to
+  the WhoInheritingACLSecurityPolicy in repoze.bfg 0.8+.  Use that one
+  instead.
+
+- LP #388096: Made a link to the community delete operation.
+
+- LP #391247: Refactored console scripts to make them easier to test
+  and maintain.  Renamed osi.ini to karl.ini.
+
+- LP #391251: Moved osi/utilities to the karl package.
+
+- Graceful handling if invalid 'To:' address in mailin.
+
+- Mailin can now signal that it is wedged by writing a file, '.error', to
+  its Maildir when it encounters an error.  This is easier to set up monitoring
+  for than scraping the logs.  Humans will still need to read the logs when
+  an error is found.
+
+3.2 (2009-06-24)
+----------------
+
+- LP #387974:  Made 'edit_acl.html' view reindex context in the 'allowed'
+  index, as well as invalidating any cached catalog queries.
+
+- Added a simpler people directory implementation to the KARL core.
+
+- For text index converters that use external programs, added a timeout thread
+  to kill hanging processes.  Process is considered hanging after 5 seconds.
+  This is to work around an error in wvConvert such that it will hang
+  indefinitely for certain inputs.
+
+
+3.1 (2009-06-16)
+----------------
+
+- LP #387390:  Add / enable delete profile view, deleting the corresponding
+  user as well.
+
+- LP #336714:  Added optional 'reason' argument to 'logout_view', to enable
+  overriding the header value passed explaining why the user landed on the
+  login form.  Use this argument when returning the logout response from
+  another view.
+
+- LP #385580:  Have the "Back to Parent" link not be full width on the <a>.
+
+- LP #385268:  Email index is converted to lower case to facilitate case
+  insensitive search.
+
+- LP #385636: Better handling of existing users in invite new users form.
+
+
+3.0 (2009-06-15)
+----------------
+
+- LP #384096: Intersect text index search results last for advanced search,
+  improving relevance ranking.
+
+- Micro-speedups for "communities" page.
+
+- LP 386110:
+
+  o Filter items in showtag view according to view permission of
+    authenticated user.
+
+  o Consolidated three showtag views to use same code.
+
+  o Fix double slashes in profile view.
+
+  o Make sure new user profiles get initialized with __acl__.
+
+
+osi-production-20090611 (2009-06-11)
+------------------------------------
+
+- Temporarily revert commit to use "natural" order of text index
+  committed in osi-production-20090610 because caused search queries
+  to ignore catalog security info.
+
+
+osi-production-20090610 (2009-06-10)
+------------------------------------
+
+- LP #384096: Updated code for generic search to use "natural" order of
+  text index, where possible.
+
+- Fixed 'karl.views.people.show_profile_view' not to blow up when
+  userid != login.
+
+- Add member_name index for text searching of just member names.
+  NOTE: This requires running reindex_catalog -p /profiles
+
+- Improved performance of member search widget in add_member_view
+
+
+osi-production-20090608 (2009-06-08)
+------------------------------------
+
+- Switched to using a multi-adapter for footer (replaces hard-wired OSI
+  branding).
+
+
+osi-production-20090603 (2009-06-03)
+------------------------------------
+
+- Made the lastfirst index case-insensitive
+
+- LP #382857: Sort community members by last name / first name.
+
+- Use get_setting instead of looking ISettings.
+
+- LP #382576: Use 'method="get"' in the advanced search form.  Also, gather
+  vars for batching from either POST or GET submissions.
+
+- grid: Fix initial sorting direction, and direction on the first click.
+
+- grid: Make header borders collapse, and adjust column width calculations
+
+- Added OfflineContextURL for enabling use of model_url outside of HTTP
+  context, and registered OfflineContextURL as an adapter for OfflineRequest.
+
+- LP #382572:
+
+  o Ensure that community / profile tag listings are slpha-sorted.
+
+- LP #381671:
+
+  o Allow narrowing tagging APIs by user.
+
+  o Pass user to profile-specific invocations of getFrequency.
+
+  o Show better breadcrumbs in tag views.
+
+  o Pass user to 'getRelatedTags' in 'profile_showtag_view'.
+
+  o Show related tag links relative to profile / community / root.
+
+- login: Disable all validation against spaces in the username.
+
+- tagsearch: Fix tagsearch result list to never wrap, and extend its length
+  for longer search results.
+
+
+osi-production-20090531 (2009-05-31)
+------------------------------------
+
+- No changes to this package.
+
+
+osi-production-20090528 (2009-05-28)
+------------------------------------
+
+- Initial version rolled out to replace KARL2.
