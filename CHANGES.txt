@@ -1,0 +1,596 @@
+Change History
+==============
+
+0.9a2 - Unreleased
+------------------
+
+0.9a1 - 2013-03-12
+------------------
+
+- Fix ordering on how ``include_me`` functions are loaded. This puts
+  Kotti's own and Kotti add-on search paths in front of
+  deform_bootstrap's.
+
+- Add image thumbs with preview popovers to @@contents view.
+
+- Add drag'n'drop ordering support to @@contents view.
+
+- Add "toggle all" checkbox to @@contents view.
+
+- Add contents path bar to @@contents view.
+
+0.8 - 2013-03-12
+----------------
+
+- No changes.
+
+0.8b2 - 2013-02-08
+------------------
+
+- Fix Kotti's tests to no longer trigger deprecation warnings.
+  Kotti's funcargs need to be better documented still, see #141.
+
+- Add a fanstatic.Group 'tagit' and need() it in the defered widget. This is
+  needed to make the tags widget render correctly with a theme package enabled
+  until the defered widget is replaced by a widget class that declares its
+  requirements in the usual deform style.
+
+- Transform ``setup_users``, ``setup_user`` and ``prefs`` views into
+  class-based views. Add a little text at subsection ``Security`` on
+  developer manual mentioning those views.
+
+0.8b1 - 2012-12-30
+------------------
+
+- No changes
+
+0.8a2 - 2012-12-15
+------------------
+
+- Remove test related dependencies on requirements.txt.
+  So now we need to run `python setup.py dev` to get testing
+  dependencies.
+
+- Update packages versions on requirements.txt for latest working
+  versions.
+
+- Added a tags display in views for documents, files, folders, and images,
+  where they show up as a horizontal list between description and body.
+
+- Modified general search to include simple tags searching. The default
+  search in Kotti works on a simple search term matching basis. Tags
+  searching is added here in a simple fashion also, such that you can only
+  search for one tag at a time, but partial matches work: searching for 'foo'
+  finds content tagged 'foo bar'.  You can also search on single tags by
+  clicking an individual tag in the tags display of an item. More
+  sophisticated tags searching, just as for general search, is left to
+  dedicated add-ons.
+
+0.8a1 - 2012-11-13
+------------------
+
+- Make language-dependent URL normalization the default.  (How to do
+  this used to be a cookbook entry.)
+
+- Cleanup node edit actions and use decorated view classes.
+
+- Add contents view with actions for multiple items.
+
+- Add children_with_permission method to ContainerMixin.
+
+- Add UI for default_view selection.
+
+- Deprecate 'kotti.views.edit.generic_add' and 'generic_edit'.  Just
+  use class-based forms instead.
+
+0.7.2 - 2012-10-02
+------------------
+
+- Improve installation instructions.  Now uses tagged requirements.txt
+  file.
+
+- Added event request POST vars to the request for the slot viewlet.
+
+- Added IFile and IImage interfaces to allow for file and image
+  subclasses to reuse the same view (registrations).
+
+0.7.1 - 2012-08-30
+------------------
+
+- Add deletion of users to the users management.
+
+- Fix tag support for files and images.
+
+- Upgrade to Twitter Bootstrap 2.1
+
+  - remove lots of CSS that is no longer needed
+
+  - fix responsive layout that was broken on some phone size
+    screen resolutions
+
+- Add "Site Setup" submenu / remove @@setup view.
+
+0.7 - 2012-08-16
+----------------
+
+- Fix critical issue with migrations where version number would not be
+  persisted in the Alembic versions table.
+
+0.7rc1 - 2012-08-14
+-------------------
+
+- No changes.
+
+0.7a6 - 2012-08-07
+------------------
+
+- Fix a bug with connections in the migration script.  This would
+  previously cause Postgres to deadlock when calling
+  ``kotti-migrate``.
+
+0.7a5 - 2012-08-07
+------------------
+
+- Add workflow support based on ``repoze.workflow``.  A simple
+  workflow is included in ``workflow.zcml`` and is active by default.
+  Use ``kotti.use_workflow = 0`` to deactivate.  The workflow support
+  adds a drop-down that allows users with ``state_change`` permission
+  to modify the workflow state.
+
+- Change the default layout
+
+  Kotti's new default look is now even closer to the Bootstrap
+  documentation, with the main nav bar at the very top and the
+  edit bar right below.
+
+  Upgrade note: if you have a customized main_template and want to
+  use the recent changes in that template, you need to swap
+  positions of ``nav.pt`` and ``editor-bar.pt`` ``api.render_template``
+  calls and remove the ``search.pt`` call from the main_template
+  (it's now called from within ``nav.pt``).
+  Everything else is completely optional.
+
+- Add migrations via Alembic.  A new script ``kotti-migrate`` helps
+  with managing database upgrades of Kotti and Kotti add-ons.  Run
+  ``kotti-migrate <your.ini> upgrade`` to upgrade the Kotti database
+  to the latest version.
+
+  Add-on authors should see the ``kotti.migrate`` module's docstring
+  for more details.
+
+- Make ``Document.body`` searchable (and therefore the search feature
+  actually useful for the first time).
+
+- Add a "minify" command to compress CSS and JS resources.
+
+  To use it run::
+
+    python setup.py dev
+    python setup.py minify
+
+  The ``minify`` command assumes, that all resources are in
+  ``kotti/static/``. ``YUI compressor`` is used for compression
+  and will be automatically installed when running
+  ``python setup.py dev``. However, you still need a JVM on
+  your development machine to be able to use the ``minify``
+  command.
+
+- Fix settings: only values for kotti* keys should be converted to
+  unicode strings.
+
+- Fix #89: Validate email address for uniqueness when user changes it.
+
+- Fix #91: Styling of search box.
+
+- Fix #104: Make fanstatic resources completely overridable.
+
+- Enabled deferred loading on File.data column.
+
+Migrations
+~~~~~~~~~~
+
+- Upgrading from 0.6 to 0.7 requires you to run a migration script on
+  your database.  To run the migration, call::
+
+    $ bin/kotti-migrate <myconfig.ini> upgrade
+
+  Make sure you **backup** your database before running the migration!
+
+- Upgrading to 0.7 will initialize workfow state and permissions for
+  all your content objects, unless you've overwritten
+  ``kotti-use_workflow`` to not use a workflow (use ``0``) or a custom
+  one.
+
+  It is **important** that sites that have custom permissions,
+  e.g. custom modifications to SITE_ACL, turn off workflow support
+  prior to running the upgrade script.
+
+0.7a4 - 2012-06-25
+------------------
+
+- Add minified versions JS/CSS files.
+
+- Fix #88: logging in with email.
+
+- Update translations.
+
+0.7a3 - 2012-06-15
+------------------
+
+- Include ``kotti.tinymce`` which adds plug-ins for image and file
+  upload and content linking to the TinyMCE rich text editor.
+
+- Slot renderers have been replaced by normal views (or viewlets).
+  ``kotti.views.slots.register`` has been deprecated in favour of
+  ``kotti.views.slots.assign_slot``, which works similarly, but takes
+  a view name of a registered view instead of a function for
+  registration.
+
+- Switch to fanstatic for static resource management.
+
+  Upgrade note: This requires changes to existing `*.ini` application
+  configuration files.  Concretely, you'll need to add a
+  ``filter:fanstatic`` section and a ``pipeline:main`` section and
+  rename an existing ``app:main`` section to ``app:Kotti`` or the
+  like.  Take a look at Kotti's own ``development.ini`` for an
+  example.
+
+- Retire the undocumented ``kotti.resources.Setting`` class and table.
+  ``kotti.get_settings`` will now return ``registry.settings``
+  straight, without looking for persistent overrides in the database.
+
+- Drop support for Pyramid<1.3, since we use
+  ``pyramid.response.FileResponse``, and kotti_tinymce uses
+  ``pyramid.view.view_defaults``.
+
+- Fix encoding error with non-ascii passwords.
+
+0.7a2 - 2012-06-07
+------------------
+
+- Do not allow inactive users to reset their password.
+
+
+0.7a1 - 2012-06-01
+------------------
+
+Features
+~~~~~~~~
+
+- Add a new 'Image' content type and image scaling, originally from
+  the kotti_image_gallery add-on.  See ``kotti.image_scales.*``
+  settings.
+
+- Add search and related setting ``kotti.search_content``.
+
+- Add subscriber to set cache headers based on caching rules.  See
+  also related setting ``kotti.caching_policy_chooser``.
+
+- Remove TinyMCE from the core.
+
+- Move email templates into page templates in
+  ``kotti:templates/email-set-password.pt`` and
+  ``kotti:templates/email-reset-password.pt``.  This is to make them
+  easier to translate and customize.  This deprecates
+  ``kotti.message.send_set_password``.
+
+- Add a 'edit_inhead' slot for stuff that goes into the edit
+  interface's head.  'inhead' is no longer be used in
+  'edit/master.pt'.
+
+- For more details, see also
+  http://danielnouri.org/notes/2012/05/28/kotti-werkpalast-sprint-wrap-up/
+
+Bugs
+~~~~
+
+- Fix bug with group edit views.
+  See https://github.com/Pylons/Kotti/pull/61
+
+- Fix bug where ``user.last_login_date`` was not set during automic
+  login after the set password screen.
+
+0.6.3 - 2012-05-08
+------------------
+
+- Add tag support.  All content objects now have tags.  They can be
+  added in the UI using the "jQuery UI Tag-it!" widget.
+  See https://github.com/Pylons/Kotti/pull/55 .
+
+- Fix a bug with file download performance.
+
+0.6.2 - 2012-04-21
+------------------
+
+- Links in Navigation view lead to node view. Added edit links
+  to view the node's edit form.
+
+- Hitting 'Cancel' now returns to the context node for add/edit views
+
+0.6.1 - 2012-03-30
+------------------
+
+- Added button to show/hide nodes from navigation in the order screen.
+
+- The 'rename' action now strips slashes out of names.  Fixes #53.
+
+- Add Dutch translation.
+
+- Allow translation of TinyMCE's UI (starting with deform 0.9.5)
+
+- Separated out testing dependencies.  Run ``bin/python setup.py dev``
+  to install Kotti with extra dependencies for testing.
+
+- Deprecate 'kotti.includes' setting.  Use the standard
+  'pyramid.includes' instead.
+
+- Setting 'Node.__acl__' to the empty list will now persist the empty
+  list instead of setting 'None'.
+
+- Let 'pyramid_deform' take care of configuring deform with
+  translation dirs and search paths.
+
+0.6.0 - 2012-03-22
+------------------
+
+- Add Japanese translation.
+
+- Enforce lowercase user names and email with registration and login.
+
+- Moved SQLAlchemy related stuff from kotti.util into kotti.sqla.
+
+- You can also append to 'Node.__acl__' now in addition to setting the
+  attribute.
+
+0.6.0b3 - 2012-03-17
+--------------------
+
+- Have the automatic ``__tablename__`` and ``polymorphic_identity``
+  for CamelCase class names use underscores, so a class
+  'MyFancyDocument' gets a table name of 'my_fancy_documents' and a
+  type of 'my_fancy_document'.
+
+0.6.0b2 - 2012-03-16
+--------------------
+
+- Make the 'item_type' attribute of AddForm optional.  Fixes #41.
+
+- ``kotti.util.title_to_name`` will now return a name with a maximum
+  length of 40.  Fixes #31.
+
+0.6.0b1 - 2012-03-15
+--------------------
+
+- Use declarative style instead of class mapper for SQLAlchemy resources.
+
+  Unfortunately, this change is backwards incompatible with existing
+  content types (not with existing databases however).  Updating your
+  types to use Declarative is simple.  See kotti_calendar for an
+  example:
+  https://github.com/dnouri/kotti_calendar/commit/509d46bd596ff338e0a88f481339882de72e49e0#diff-1
+
+0.5.2 - 2012-03-10
+------------------
+
+- A new 'Actions' menu makes copy, paste, delete and rename of items
+  more accessible.
+
+- Add German translation.
+
+- Populators no longer need to call ``transaction.commit()``
+  themselves.
+
+0.5.1 - 2012-02-27
+------------------
+
+- Internationalize user interface.  Add Portuguese as the first
+  translation.
+
+- A new 'Add' menu in the editor toolbar allows for a more intuitive
+  adding of items in the CMS.
+
+- Refine ``Node.copy``.  No longer copy over local roles per default.
+
+0.5.0 - 2012-02-15
+------------------
+
+- Move Kotti's default user interface to use Twitter Bootstrap 2.
+
+- Add a new 'File' content type.
+
+- Add CSRF protection to some forms.
+
+- Remove Kotti's ``FormController`` in favor of using ``pyramid_deform``.
+
+- Use plone.i18n to normalize titles to URL parts.
+
+- Add a separate navigation screen that replaces the former
+  intelligent breadcrumbs menu.
+
+- Use ``pyramid_beaker`` as the default session factory.
+
+- Make ``kotti.messages.send_set_password`` a bit more flexible.
+
+0.4.5 - 2012-01-19
+------------------
+
+- Add 'kotti.security.has_permission' which may be used instead of
+  'pyramid.security.has_permission'.
+
+  The difference is that Kotti's version will set the "authorization
+  context" to be the context that you pass to 'has_permission'.  The
+  effect is that 'list_groups' will return a more correct list of
+  local roles, i.e. the groups in the given context instead of
+  'request.context'.
+
+- Add a template ('forbidden.pt') for when user is logged in but still
+  getting HTTPForbidden.
+
+0.4.4 - 2012-01-05
+------------------
+
+- The "Forbidden View" will no longer redirect clients that don't
+  accept 'text/html' to the login form.
+
+- Fix bug with 'kotti.site_title' setting.
+
+0.4.3 - 2011-12-22
+------------------
+
+- Add 'kotti.root_factory' setting which allows the override Kotti's
+  default Pyramid *root factory*.  Also, make master templates more
+  robust so that a minimal root with '__parent__' and '__name__' can
+  be rendered.
+
+- The 'kotti.tests' was factored out.  Tests should now import from
+  'kotti.testing'.
+
+0.4.2 - 2011-12-20
+------------------
+
+- More convenient overrides for add-on packages by better use of
+  'config.commit()'.
+
+0.4.1 - 2011-12-20
+------------------
+
+- Modularize Kotti's Paste App Factory 'kotti.main'.
+
+- Allow explicit setting of tables that Kotti creates
+  ('kotti.use_tables').
+
+0.4.0 - 2011-12-14
+------------------
+
+- Remove configuration variables 'kotti.templates.*' in favour of
+  'kotti.asset_overrides', which uses Pyramid asset specs and their
+  overrides.
+
+- Remove 'TemplateAPI.__getitem__' and instead add 'TemplateAPI.macro'
+  which has a similar but less 'special' API.
+
+- Factor snippets in 'kotti/templates/snippets.pt' out into their own
+  templates.  Use 'api.render_template' to render them instead of
+  macros.
+
+0.3.1 - 2011-12-09
+------------------
+
+- Add 'keys' method to mutation dicts (see 0.3.0).
+
+0.3.0 - 2011-11-30
+-------------------
+
+- Replace `Node.__annotations__` in favor of an extended `Node.annotations`.
+
+  `Node.annotations` will attempt to not only recognize changes to
+  subobjects of type dict, it will also handle list objects
+  transparently.  That is, changing arbitrary JSON structures should
+  just work with regard to calling `node.annotations.changed()` when
+  the structure was changed.
+
+0.2.10 - 2011-11-22
+-------------------
+
+- 'api.format_datetime' now also accepts a timestamp in addition to datetime.
+
+0.2.9 - 2011-11-21
+------------------
+
+- Remove MANIFEST.in in favour of using 'setuptools-git'.
+
+0.2.8 - 2011-11-21
+------------------
+
+- Remove 'PasteScript' dependency since that would result in spurious
+  errors when installing Kotti. See
+  http://jenkins.danielnouri.org/job/Kotti/42/TOXENV=py27/console
+
+0.2.7 - 2011-11-20
+------------------
+
+- Add 'PasteScript' dependency.
+
+- Fix #11 where 'python setup.py test' would look into a hard-coded
+  'bin' directory.
+
+- Structural analysis documentation. (Unfinished; in 'analysis' directory
+  during development. Will be moved to main docs when finished.)
+
+0.2.6 - 2011-11-17
+------------------
+
+- Add `Node.__annotations__` convenience attribute.
+
+  `Node.__annotations__` will wrap the annotations dict in such a way
+  that both item and attribute access are possible.  It'll also record
+  changes to dicts inside dicts and mark the parent `__annotations__`
+  attribute as dirty.
+
+- Add a welcome page.
+- Delete the demo added in version 0.2.4.
+
+0.2.5 - 2011-11-14
+------------------
+
+- Add 'TemplateAPI.render_template'; allow templates to be rendered
+  conveniently from templates.
+
+0.2.4 - 2011-11-13
+------------------
+
+- Adjust for Pyramid 1.2: INI file, pyramid_tm, Wsgiref server, pcreate and
+  pserve. (MO)
+
+- Add Kotti Demo source and documentation.
+
+0.2.3 - 2011-10-28
+------------------
+
+- ``Node.__getitem__`` will now also accept a tuple as key.
+
+  ``folder['1', '2']`` is the same as ``folder['1']['2']``, just more
+  efficient.
+
+- Added a new cache decorator based on ``repoze.lru``.
+
+0.2.2 - 2011-10-10
+------------------
+
+- Change the function signature of ``kotti.authn_policy_factory``,
+  ``kotti.authz_policy_factory`` and ``kotti.session_factory`` to
+  include all settings from the configuration file.
+
+0.2.1 - 2011-09-29
+------------------
+
+- Minor changes to events setup code to ease usage in tests.
+
+0.2 - 2011-09-16
+----------------
+
+- No changes.
+
+0.2a2 - 2011-09-05
+------------------
+
+- Fix templates to be compatible with Chameleon 2.  Also, require
+  Chameleon>=2.
+
+- Require pyramid>=1.2.  Also, enable pyramid_debugtoolbar for
+  ``development.ini`` profile.
+
+0.2a1 - 2011-08-29
+------------------
+
+- Improve database schema for ``Nodes``.  Split ``Node`` class into
+  ``Node`` and ``Content``.
+
+  This change is backward incompatible in that existing content types
+  in your code will need to subclass ``Content`` instead of ``Node``.
+  The example in the docs has been updated.  Also, the underlying
+  database schema has changed.
+
+- Improve user database hashing and local roles storage.
+
+- Compatibility fix for Pyramid 1.2.
