@@ -1,0 +1,6 @@
+{% extends "templates/base.jinja2" %}
+
+{% block content %}
+    <h1 class="view">Volumes <small>list</small></h1>
+    {{ macros.volumes_table(request, objects) }}
+{% endblock %}

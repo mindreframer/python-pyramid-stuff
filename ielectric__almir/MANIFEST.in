@@ -1,0 +1,4 @@
+include *.cfg *.rst *.in *.ini LICENSE
+graft almir
+graft docs
+graft buildout.d
