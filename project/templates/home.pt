@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+  <head>
+    <title>Note When Things Happen</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="./static/styles.css"/>
+  </head>
+  <body>
+    <div tal:condition="logged_in">
+      <span>
+        Hello, ${logged_in | 'guest'}
+      </span>
+
+      <div class="logout">
+        <form action="/" method="post">
+          <p>
+            <input type="submit" value="logout" name="logout"/>
+          </p>
+        </form>
+      </div>
+
+      <div class="homeaction"><a href="./create-user">Create a New User</a></div>
+      <div class="homeaction"><a href="./create-event-type">Create a New Event Type</a></div>
+
+      <div class="favorites_box">
+        <h2>Your Favorites:</h2>
+        <div class="favorites_list">
+          <div tal:repeat="et favorites">
+            <a href="/event-types/${et.code}">${et.description}</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div  tal:condition="not:logged_in">
+      <h1>Welcome</h1>
+      <em>Please log in</em>
+      <div><b>${message}</b></div>
+      <form action="/" method="post">
+        <p>
+          Name: <input type="text" name="userid"/><br/>
+          <input type="submit" value="Log In" name="login"/>
+        </p>
+      </form>
+    </div>
+  </body>
+</html>
