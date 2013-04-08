@@ -13,10 +13,11 @@ Pyramid:
 
 
   Videos/Tutorials:
-
+  - http://www.youtube.com/watch?v=rNXr5MDyMlE (Tom Lazar: WSGI, Pyramid und Plone (Plone Konferenz München 2012))
   - http://docs.pylonsproject.org/projects/pyramid_cookbook/en/latest/misc/videos.html
   - http://www.slideshare.net/amleczko/how-to-build-complex-web-applications-having-fun (https://ep2013.europython.eu/conference/talks/how-to-build-complex-web-applications-having-fun)
   - http://www.sixfeetup.com/blog/intro-to-the-python-framework-pyramid-and-a-sample-app
+  - http://www.youtube.com/watch?v=XKYuKWqr_do&feature=youtu.be (Pyramid Web Framework, 14.11.2012)
   - http://www.youtube.com/watch?v=DBV0MsRu72M (Pyramid: Lighter, faster, better web apps - Mr. Dylan Jay, 2011)
   - http://www.youtube.com/watch?v=dKZjbm_qLUM (Writing a Pyramid application)
   - http://www.youtube.com/watch?v=vNvMAOko6ME (Writing a Pyramid application (Part 2, EuroPython 2012))
