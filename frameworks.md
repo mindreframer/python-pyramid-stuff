@@ -38,6 +38,7 @@ SQLalchemy:
 
 
 Conferences:
+  - http://pyvideo.org/
   - http://www.youtube.com/user/PythonItalia
   - http://www.youtube.com/user/PyConAU
   - http://www.youtube.com/user/pyconireland
