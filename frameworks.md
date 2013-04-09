@@ -1,12 +1,6 @@
-Let's try Python:
-
-
-
-
-Pyramid:
+## Pyramid:
 
   - https://github.com/Pylons
-
   - http://danielnouri.org/notes/2011/03/16/pyramid-is-too-damn-easy---a-success-story/
   - http://docs.pylonsproject.org/en/latest/docs/pyramid.html
   - http://media.readthedocs.org/pdf/pyramid/1.4-branch/pyramid.pdf
@@ -36,3 +30,8 @@ Debugging:
 
 Gevent:
   - http://pyvideo.org/video/1573/gevent-socketio-cross-framework-real-time-web-li (Gevent-socketio, cross-framework real-time web live demo)
+
+SQLalchemy:
+  - http://www.youtube.com/watch?v=E09qigk_hnY (Hand Coded Applications with SQLAlchemy)
+  - http://www.youtube.com/watch?v=Thd8yoBou7k (SQL for Python Developers)
+
