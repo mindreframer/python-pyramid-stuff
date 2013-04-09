@@ -35,3 +35,13 @@ SQLalchemy:
   - http://www.youtube.com/watch?v=E09qigk_hnY (Hand Coded Applications with SQLAlchemy)
   - http://www.youtube.com/watch?v=Thd8yoBou7k (SQL for Python Developers)
 
+
+
+Conferences:
+  - http://www.youtube.com/user/PythonItalia
+  - http://www.youtube.com/user/PyConAU
+  - http://www.youtube.com/user/pyconireland
+  - http://www.youtube.com/user/PyConDE
+  - http://www.youtube.com/user/PyConAPAC
+  - http://www.youtube.com/user/inpycon
+  - http://blip.tv/pycon-us-videos-2009-2010-2011
